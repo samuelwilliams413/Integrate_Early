@@ -1,4 +1,4 @@
-function [xv1, yv1, xv2, yv2] = get_quad(i, trackingin, matches);
+function [xv1, yv1, xv2, yv2] = get_polygon(i, trackingin, matches);
 
     x = trackingin(i, 1) + 0.5 * trackingin(i, 3);
     y = trackingin(i, 2) + 0.5 * trackingin(i, 4);

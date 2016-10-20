@@ -8,7 +8,7 @@ function [bag] = make_bag_o_D(trackingin, matches, filename);
     figure, imshow(I), hold on;
     
     tmp = 0;
-    [bag] = face_finder(image, trackingin, matches);
+    [bag] = face_circle_finder(image, trackingin, matches);
     for i = 1:length(bag)
         if(bag(i,1) > bag(i,2))
             tmp = bag(i,1);

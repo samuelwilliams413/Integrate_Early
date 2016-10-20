@@ -1,4 +1,4 @@
-function [bag] = face_finder(image, trackingin, matches);
+function [bag] = face_circle_finder(image, trackingin, matches);
     Rmin = 5;
     Rmax = 15;
 
@@ -10,6 +10,6 @@ function [bag] = face_finder(image, trackingin, matches);
     
     viscircles(centers, radii,'EdgeColor','b');
     hold on;
-    [bag] = reader(centers, trackingin, matches);
+    [bag] = count_polygons(centers, trackingin, matches);
     
 end

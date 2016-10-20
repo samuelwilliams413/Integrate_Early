@@ -1,4 +1,4 @@
-function [bag] = reader(centers, trackingin, matches);
+function [bag] = count_polygons(centers, trackingin, matches);
 
     for i = 1:length(centers)
         xq(i) = centers(i, 1);
