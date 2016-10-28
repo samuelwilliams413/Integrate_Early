@@ -30,37 +30,37 @@ function [xv1, yv1, xv2, yv2] = get_polygon(i, trackingin, matches);
     BL(1) = trackingin(i, 1);
     BL(2) = trackingin(i, 2) + trackingin(i, 4);
 
-    xv1 = [BoR(1) TL(1) TR(1) ToL(1) BoR(1)];
-    yv1 = [BoR(2) TL(2) TR(2) ToL(2) BoR(2)];
-
-    xv2 = [BoR(1) BL(1) BR(1) ToL(1) BoR(1)];
-    yv2 = [BoR(2) BL(2) BR(2) ToL(2) BoR(2)];
-
-
-    if BoR(2) > (trackingin(i, 2) + trackingin(i, 4))
-        BoR(2) = (trackingin(i, 2) + trackingin(i, 4));
-        BoR(1) = (BoR(2) - off) / m;
-
-        ToL(2) = (trackingin(i, 2));
-        ToL(1) = (ToL(2) - off) / m;
-
-
-        xv1 = [BoR(1) BL(1) TL(1) ToL(1) BoR(1)];
-        yv1 = [BoR(2) BL(2) TL(2) ToL(2) BoR(2)];
-
-        xv2 = [BoR(1) BR(1) TR(1) ToL(1) BoR(1)];
-        yv2 = [BoR(2) BR(2) TR(2) ToL(2) BoR(2)];
-
-
-    end
-
-    if ToL(2) > (trackingin(i, 2) + trackingin(i, 4))
-        ToL(2) = (trackingin(i, 2) + trackingin(i, 4));
-        ToL(1) = (ToL(2) - off) / m;
-
-        BoR(2) = (trackingin(i, 2));
-        BoR(1) = (BoR(2) - off) / m;
-    end
+%     xv1 = [BoR(1) TL(1) TR(1) ToL(1) BoR(1)];
+%     yv1 = [BoR(2) TL(2) TR(2) ToL(2) BoR(2)];
+% 
+%     xv2 = [BoR(1) BL(1) BR(1) ToL(1) BoR(1)];
+%     yv2 = [BoR(2) BL(2) BR(2) ToL(2) BoR(2)];
+% 
+% 
+%     if BoR(2) > (trackingin(i, 2) + trackingin(i, 4))
+%         BoR(2) = (trackingin(i, 2) + trackingin(i, 4));
+%         BoR(1) = (BoR(2) - off) / m;
+% 
+%         ToL(2) = (trackingin(i, 2));
+%         ToL(1) = (ToL(2) - off) / m;
+% 
+% 
+%         xv1 = [BoR(1) BL(1) TL(1) ToL(1) BoR(1)];
+%         yv1 = [BoR(2) BL(2) TL(2) ToL(2) BoR(2)];
+% 
+%         xv2 = [BoR(1) BR(1) TR(1) ToL(1) BoR(1)];
+%         yv2 = [BoR(2) BR(2) TR(2) ToL(2) BoR(2)];
+% 
+% 
+%     end
+% 
+%     if ToL(2) > (trackingin(i, 2) + trackingin(i, 4))
+%         ToL(2) = (trackingin(i, 2) + trackingin(i, 4));
+%         ToL(1) = (ToL(2) - off) / m;
+% 
+%         BoR(2) = (trackingin(i, 2));
+%         BoR(1) = (BoR(2) - off) / m;
+%     end
 
 
     plot(BoR(1), BoR(2),'r+','LineWidth',2); % B || L
