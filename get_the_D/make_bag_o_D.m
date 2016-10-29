@@ -9,11 +9,11 @@ function [bag] = make_bag_o_D(trackingin, matches, filename);
     
     tmp = 0;
     [bag] = face_circle_finder(image, trackingin, matches);
-    for i = 1:length(bag)
-        if(bag(i,1) > bag(i,2))
-            tmp = bag(i,1);
-            bag(i,1) = bag(i,2);
-            bag(i,2) = tmp;
-        end
-    end
+%     for i = 1:length(bag)
+%         if(bag(i,1) > bag(i,2))
+%             tmp = bag(i,1);
+%             bag(i,1) = bag(i,2);
+%             bag(i,2) = tmp;
+%         end
+%     end
 end

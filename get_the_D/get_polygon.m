@@ -1,74 +1,78 @@
-function [xv1, yv1, xv2, yv2] = get_polygon(i, trackingin, matches);
+function [xv1, yv1, xv2, yv2] = get_polygon(index, trackingin, matches);
 
-    x = trackingin(i, 1) + 0.5 * trackingin(i, 3);
-    y = trackingin(i, 2) + 0.5 * trackingin(i, 4);
-    m = (matches(i,12) - matches(i,10))/(matches(i,11) - matches(i,9));
-    m = tand(atand(m) );
+x = trackingin(index, 1) + 0.5 * trackingin(index, 3);
+y = trackingin(index, 2) + 0.5 * trackingin(index, 4);
+m = (matches(index,12) - matches(index,10))/(matches(index,11) - matches(index,9));
+m = tand(atand(m));
 
-    off = y - m*x;
-    hold on
+off = y - m*x;
+hold on
 %     ps % points inside
-    x = 0:1:2000;
-    y = m*x+off;
-    % plot(x, y);
+x = 0:1:2000;
+y = m*x+off;
+%      plot(x, y)
 
-    BoR(1) = trackingin(i, 1);
-    ToL(1) = trackingin(i, 1) + trackingin(i, 3);
-    BoR(2) = m*BoR(1) + off;
-    ToL(2) = m*ToL(1) + off;
-
-
-    TL(1) = trackingin(i, 1);
-    TL(2) = trackingin(i, 2);
-
-    TR(1) = trackingin(i, 1) + trackingin(i, 3);
-    TR(2) = trackingin(i, 2);
-
-    BR(1) = trackingin(i, 1) + trackingin(i, 3);
-    BR(2) = trackingin(i, 2) + trackingin(i, 4);
-
-    BL(1) = trackingin(i, 1);
-    BL(2) = trackingin(i, 2) + trackingin(i, 4);
-
-%     xv1 = [BoR(1) TL(1) TR(1) ToL(1) BoR(1)];
-%     yv1 = [BoR(2) TL(2) TR(2) ToL(2) BoR(2)];
-% 
-%     xv2 = [BoR(1) BL(1) BR(1) ToL(1) BoR(1)];
-%     yv2 = [BoR(2) BL(2) BR(2) ToL(2) BoR(2)];
-% 
-% 
-%     if BoR(2) > (trackingin(i, 2) + trackingin(i, 4))
-%         BoR(2) = (trackingin(i, 2) + trackingin(i, 4));
-%         BoR(1) = (BoR(2) - off) / m;
-% 
-%         ToL(2) = (trackingin(i, 2));
-%         ToL(1) = (ToL(2) - off) / m;
-% 
-% 
-%         xv1 = [BoR(1) BL(1) TL(1) ToL(1) BoR(1)];
-%         yv1 = [BoR(2) BL(2) TL(2) ToL(2) BoR(2)];
-% 
-%         xv2 = [BoR(1) BR(1) TR(1) ToL(1) BoR(1)];
-%         yv2 = [BoR(2) BR(2) TR(2) ToL(2) BoR(2)];
-% 
-% 
-%     end
-% 
-%     if ToL(2) > (trackingin(i, 2) + trackingin(i, 4))
-%         ToL(2) = (trackingin(i, 2) + trackingin(i, 4));
-%         ToL(1) = (ToL(2) - off) / m;
-% 
-%         BoR(2) = (trackingin(i, 2));
-%         BoR(1) = (BoR(2) - off) / m;
-%     end
+BoR(1) = trackingin(index, 1);
+ToL(1) = trackingin(index, 1) + trackingin(index, 3);
+BoR(2) = m*BoR(1) + off;
+ToL(2) = m*ToL(1) + off;
 
 
+TL(1) = trackingin(index, 1);
+TL(2) = trackingin(index, 2);
+
+TR(1) = trackingin(index, 1) + trackingin(index, 3);
+TR(2) = trackingin(index, 2);
+
+BR(1) = trackingin(index, 1) + trackingin(index, 3);
+BR(2) = trackingin(index, 2) + trackingin(index, 4);
+
+BL(1) = trackingin(index, 1);
+BL(2) = trackingin(index, 2) + trackingin(index, 4);
+
+if(atand(m) > 45)
+    % set max height
+    ToL(2) = TL(2);
+    BoR(2) = BL(2);
+    
+    %set center pol
+    ToL(1) = (ToL(2) - off)/m;
+    BoR(1) = (BoR(2) - off)/m;
+end
+
+j = 1;
+xv1 = [TL(j) ToL(j) BoR(j) BL(j) TL(j)];
+j = 2;
+yv1 = [TL(j) ToL(j) BoR(j) BL(j) TL(j)];
+
+j = 1;
+xv2 = [TR(j) ToL(j) BoR(j) BR(j) TR(j)];
+j = 2;
+yv2 = [TR(j) ToL(j) BoR(j) BR(j) TR(j)];
+
+if(atand(m) < 45)
+    j = 1;
+    xv1 = [BL(j) BoR(j) ToL(j) BR(j) BL(j)];
+    j = 2;
+    yv1 = [BL(j) BoR(j) ToL(j) BR(j) BL(j)];
+    
+    j = 1;
+    xv2 = [TL(j) BoR(j) ToL(j) TR(j) TL(j)];
+    j = 2;
+    yv2 = [TL(j) BoR(j) ToL(j) TR(j) TL(j)];
+end
+
+if index == 3 || index == 2
+    m = (matches(index,12) - matches(index,10))/(matches(index,11) - matches(index,9))
+    m = (atand(m))
+    yv1
     plot(BoR(1), BoR(2),'r+','LineWidth',2); % B || L
     plot(TL(1), TL(2),'b*','LineWidth',2); % TL
-    plot(TR(1), TR(2),'bo','LineWidth',2); % TR
+    plot(TR(1), TR(2),'ro','LineWidth',2); % TR
     plot(ToL(1), ToL(2),'r*','LineWidth',2); % T || L
-    plot(BL(1), BL(2),'yo','LineWidth',2); % BL
+    plot(BL(1), BL(2),'go','LineWidth',2); % BL
     plot(BR(1), BR(2),'y*','LineWidth',2); % BR
+end
 
 
 end
