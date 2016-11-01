@@ -122,7 +122,7 @@
                         && (((checkendsx < xdotval2) && (checkendsx > xdotval1)) || ((checkendsx > xdotval2) && (checkendsx < xdotval1))))
                     dotproductsordered(r,dot) = -139;
                 end
-            end
+
         end
     end
 
