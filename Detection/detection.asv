@@ -37,7 +37,7 @@ function [matches, dominosactual, finalfinallines, trackingin] = detection(pictu
     %% Code that is uncommented for the testing of previously stored images
     
     % Read image from a file
-%     picturein = imread('redbull.jpg');
+%     picturein = imread('redbull2.jpg');
     
     % Read image from an array
     % load('array_for_Bradley.mat');
@@ -145,19 +145,32 @@ function [matches, dominosactual, finalfinallines, trackingin] = detection(pictu
         yval1 = lines(ninetydegrees).point1(1,2);
         xval2 = lines(ninetydegrees).point2(1,1);
         yval2 = lines(ninetydegrees).point2(1,2);
-        % Compare against every line to determine the angles between each
-        for ninetyonedegrees = 1:(length(lines))                        
-            if (((abs(dotproductsordered(ninetydegrees,ninetyonedegrees)) > rightanglethreshold) && ...
-                    (abs(dotproductsordered(ninetydegrees,ninetyonedegrees)) < rightanglethresholdmax)) || ...
-                    ((dotproductsordered(ninetydegrees,ninetyonedegrees)) == (-139)))
-               finallines(indexvalue,1)=ninetydegrees;
-               finallines(indexvalue,2)=xval1;
-               finallines(indexvalue,3)=yval1;
-               finallines(indexvalue,4)=xval2;
-               finallines(indexvalue,5)=yval2;
-               linkedlines(indexvalue,1)=ninetydegrees;
-               linkedlines(indexvalue,2)=ninetyonedegrees;
-               indexvalue = indexvalue + 1;
+        atleast2 = 3;
+        for checkfortwo = 1:length(lines)
+            if ((abs(dotproductsordered(ninetydegrees,checkfortwo)) > rightanglethreshold) && ...
+                    (abs(dotproductsordered(ninetydegrees,checkfortwo)) < rightanglethresholdmax) || ...
+                    (abs(dotproductsordered(ninetydegrees,checkfortwo)) == (-139)))                     
+                atleast2 = atleast2 + 1;
+            end
+        end
+        % Ensure that there are at least two other lines that are
+        % perpendicular to each line, within proximity. This is a further
+        % stage of removing detections that are not dominos
+        if atleast2 > 2
+            % Compare against every line to determine the angles between each
+            for ninetyonedegrees = 1:(length(lines))                        
+                if (((abs(dotproductsordered(ninetydegrees,ninetyonedegrees)) > rightanglethreshold) && ...
+                        (abs(dotproductsordered(ninetydegrees,ninetyonedegrees)) < rightanglethresholdmax)) || ...
+                        ((dotproductsordered(ninetydegrees,ninetyonedegrees)) == (-139)))
+                   finallines(indexvalue,1)=ninetydegrees;
+                   finallines(indexvalue,2)=xval1;
+                   finallines(indexvalue,3)=yval1;
+                   finallines(indexvalue,4)=xval2;
+                   finallines(indexvalue,5)=yval2;
+                   linkedlines(indexvalue,1)=ninetydegrees;
+                   linkedlines(indexvalue,2)=ninetyonedegrees;
+                   indexvalue = indexvalue + 1;
+                end
             end
         end
     end
@@ -432,6 +445,7 @@ function [matches, dominosactual, finalfinallines, trackingin] = detection(pictu
             end
             % Add the domino row normally if it was not split
             if domsplit == 0
+                addyes = 0;
                 for addnonsplit = 1:dominosbutoverlapdim(1,2)
                      if dominosbutoverlap(currentdomino,addnonsplit) ~= 0
                         dominosactual(currentrow,addnonsplit) = dominosbutoverlap(currentdomino,addnonsplit);
@@ -442,8 +456,6 @@ function [matches, dominosactual, finalfinallines, trackingin] = detection(pictu
         end
     end
     
-    % Remove any redundant rows, and also any zero rows as a result of the
-    % row combinations
     dominosactual = unique(dominosactual, 'rows');
     dominosactual = dominosactual(any(dominosactual,2),:);
 
@@ -882,6 +894,6 @@ function [matches, dominosactual, finalfinallines, trackingin] = detection(pictu
     
     toc
     
-end
+%end
 
             
