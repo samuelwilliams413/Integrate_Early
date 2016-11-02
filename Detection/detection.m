@@ -1,4 +1,4 @@
-%function [matches, dominosactual, finalfinallines, trackingin] = detection(picturein);
+function [matches, dominosactual, finalfinallines, trackingin] = detection(picturein);
 
     %% Bryden Page domino detection software, 2016, METR4202, The University
     % of Queensland
@@ -37,8 +37,7 @@
     %% Code that is uncommented for the testing of previously stored images
     
     % Read image from a file
-%     picturein = imread('crosslines.jpg');
-    picturein = imread('redbull2.jpg');
+%     picturein = imread('redbull.jpg');
     
     % Read image from an array
     % load('array_for_Bradley.mat');
@@ -131,8 +130,6 @@
     linkedlines = [];
     indexvalue = 1;
     angleallowance = 10;
-    zeroanglethreshold = (- angleallowance);
-    zeroanglethresholdmax = angleallowance;
     rightanglethreshold = 90 - angleallowance;
     rightanglethresholdmax = 90 + angleallowance;
 
@@ -148,35 +145,19 @@
         yval1 = lines(ninetydegrees).point1(1,2);
         xval2 = lines(ninetydegrees).point2(1,1);
         yval2 = lines(ninetydegrees).point2(1,2);
-        atleast2 = 3;
-        for checkfortwo = 1:length(lines)
-            if ((abs(dotproductsordered(ninetydegrees,checkfortwo)) > rightanglethreshold) && ...
-                    (abs(dotproductsordered(ninetydegrees,checkfortwo)) < rightanglethresholdmax) || ...
-                    (abs(dotproductsordered(ninetydegrees,checkfortwo)) == (-139)))                     
-                atleast2 = atleast2 + 1;
-            end
-        end
-        % Ensure that there are at least two other lines that are
-        % perpendicular to each line, within proximity. This is a further
-        % stage of removing detections that are not dominos
-        if atleast2 > 2
-            % Compare against every line to determine the angles between each
-            for ninetyonedegrees = 1:(length(lines))                        
-                if (((abs(dotproductsordered(ninetydegrees,ninetyonedegrees)) > rightanglethreshold) && ...
-                        (abs(dotproductsordered(ninetydegrees,ninetyonedegrees)) < rightanglethresholdmax)) || ...
-                        ((dotproductsordered(ninetydegrees,ninetyonedegrees)) == (-139)))
-%                         ((abs(dotproductsordered(ninetydegrees,ninetyonedegrees)) > zeroanglethreshold) && ...
-%                         (abs(dotproductsordered(ninetydegrees,ninetyonedegrees)) < zeroanglethresholdmax)) && ...
-%                         (ninetydegrees ~= ninetyonedegrees)
-                   finallines(indexvalue,1)=ninetydegrees;
-                   finallines(indexvalue,2)=xval1;
-                   finallines(indexvalue,3)=yval1;
-                   finallines(indexvalue,4)=xval2;
-                   finallines(indexvalue,5)=yval2;
-                   linkedlines(indexvalue,1)=ninetydegrees;
-                   linkedlines(indexvalue,2)=ninetyonedegrees;
-                   indexvalue = indexvalue + 1;
-                end
+        % Compare against every line to determine the angles between each
+        for ninetyonedegrees = 1:(length(lines))                        
+            if (((abs(dotproductsordered(ninetydegrees,ninetyonedegrees)) > rightanglethreshold) && ...
+                    (abs(dotproductsordered(ninetydegrees,ninetyonedegrees)) < rightanglethresholdmax)) || ...
+                    ((dotproductsordered(ninetydegrees,ninetyonedegrees)) == (-139)))
+               finallines(indexvalue,1)=ninetydegrees;
+               finallines(indexvalue,2)=xval1;
+               finallines(indexvalue,3)=yval1;
+               finallines(indexvalue,4)=xval2;
+               finallines(indexvalue,5)=yval2;
+               linkedlines(indexvalue,1)=ninetydegrees;
+               linkedlines(indexvalue,2)=ninetyonedegrees;
+               indexvalue = indexvalue + 1;
             end
         end
     end
@@ -345,21 +326,21 @@
     
     % Remove dominos that have no perpendicular sides
     for eachdom = 1:dominodim(1,1)
-        checkdom = 0;
-        %while checkdom == 0          
+        checkdom = 0;       
         for eachentry = 1:dominodim(1,2)
             currentline = dominos(eachdom,eachentry);
             for checkrest = 1:dominodim(1,2)
                 if (((dominos(eachdom,checkrest)) ~= 0) && (currentline ~= 0))
-                    if ((dotproductsordered(dominos(eachdom,checkrest),currentline) ~= (-139))...
-                            && ((dotproductsordered(dominos(eachdom,checkrest),currentline) > 45)))
+                    if (dotproductsordered(dominos(eachdom,checkrest),currentline) > rightanglethreshold)...
+                            && (dotproductsordered(dominos(eachdom,checkrest),currentline) < rightanglethresholdmax)
                         checkdom = 1;
                         break
                     end
                 end
             end
         end
-       % end
+        % Add only dominos with at least one (close to) perpendicular set
+        % of sides
         if checkdom == 1
             for adddomino = 1:dominodim(1,2)
                 dominoswithduplicates(dominorowindex,adddomino) = dominos(eachdom,adddomino);
@@ -368,8 +349,104 @@
         end
     end
     
-    dominosactual = unique(dominoswithduplicates, 'rows');
+    % Previous method creates many duplicate rows. Remove them
+    dominosbutoverlap = unique(dominoswithduplicates, 'rows');
     
+    % This code will remove occasions where domino lines have become split
+    % and subsequently appear to be separate dominos when they arent
+    dominosactual = []; 
+    dominosbutoverlapdim = size(dominosbutoverlap);
+    currentrow = 1;
+    % For each domino in the current domino array
+    for currentdomino = 1:dominosbutoverlapdim(1,1)
+        domsplit = 0;
+        rowmatch = 0;
+        % For the first row, no duplicates possible so add it straight in
+        if currentdomino == 1
+            for addfirst = 1:dominosbutoverlapdim(1,2)
+                dominosactual(1,addfirst) = dominosbutoverlap(1,addfirst);                
+            end
+            currentrow = 2;
+        % If not the first domino    
+        else
+            % For each entry of the current domino
+            for others = 1:dominosbutoverlapdim(1,2)
+                % Compare against every previously added domino row to new
+                % array
+                for checkprevdoms = 1:(currentdomino - 1)
+                    % Check against every entry in each domino row
+                    for checkprevdomvals = 1:dominosbutoverlapdim(1,2)
+                        % Ensure that we havent reached the zero entries
+                        if dominosbutoverlap(checkprevdoms,checkprevdomvals) ~= 0
+                            % If there is a match anywhere, the domino has
+                            % become split and must be rejoined
+                            if dominosbutoverlap(currentdomino,others) == dominosbutoverlap(checkprevdoms,checkprevdomvals)
+                                domsplit = 1;
+                                rowmatch = checkprevdoms;
+                            end
+                        end
+                    end
+                end
+            end
+            % If the domino needs to be combined from separate domino rows
+            if domsplit == 1
+                currentsecond = 1;
+                % For all entries of the domino in the old array
+                for addall = 1:dominosbutoverlapdim(1,2)
+                    % If the current entry is not a zero entry
+                    if dominosbutoverlap(currentdomino,addall) ~= 0
+                        % Find the next zero free in the domino to which it
+                        % is to be added (the matched one)
+                        zerofinder = 0;
+                        while zerofinder == 0
+                            dominosactualdim = size(dominosactual);
+                            for findzero = 1:dominosactualdim(1,2)
+                                if dominosactual(rowmatch,findzero) == 0
+                                    zerofinder = 1;
+                                    break
+                                end
+                            end
+                            break
+                        end
+                        % Check for entries already in the combined domino
+                        dominosactualdim = size(dominosactual);
+                        dontadd = 0;
+                        dominosbutoverlapdim = size(dominosbutoverlap);
+                        for checkeach = 1:dominosbutoverlapdim(1,2)
+                            if dominosbutoverlap(rowmatch,checkeach) == dominosbutoverlap(currentdomino,addall)
+                                dontadd = 1;
+                            end
+                        end
+                        % Add entries that are not already in the domino,
+                        % that belong there
+                        if dontadd == 0
+                            if zerofinder == 1
+                                dominosactual(rowmatch,findzero) = dominosbutoverlap(currentdomino,addall);
+                            else
+                                dominosactual(rowmatch,(dominosactualdim(1,2)+1)) = dominosbutoverlap(currentdomino,addall);
+                            end
+                        end
+                    end
+                end
+                currentrow = currentrow + 1;
+            end
+            % Add the domino row normally if it was not split
+            if domsplit == 0
+                for addnonsplit = 1:dominosbutoverlapdim(1,2)
+                     if dominosbutoverlap(currentdomino,addnonsplit) ~= 0
+                        dominosactual(currentrow,addnonsplit) = dominosbutoverlap(currentdomino,addnonsplit);
+                     end
+                end
+                currentrow = currentrow + 1;
+            end
+        end
+    end
+    
+    % Remove any redundant rows, and also any zero rows as a result of the
+    % row combinations
+    dominosactual = unique(dominosactual, 'rows');
+    dominosactual = dominosactual(any(dominosactual,2),:);
+
     ffldim = size(finalfinallines);
     bounds = [];
     
@@ -805,6 +882,6 @@
     
     toc
     
-%end
+end
 
             
