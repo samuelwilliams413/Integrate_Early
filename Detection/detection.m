@@ -1,4 +1,5 @@
 function [matches, dominosactual, finalfinallines, trackingin] = detection(picturein);
+% clear all
 
     %% Bryden Page domino detection software, 2016, METR4202, The University
     % of Queensland
@@ -37,7 +38,7 @@ function [matches, dominosactual, finalfinallines, trackingin] = detection(pictu
     %% Code that is uncommented for the testing of previously stored images
     
     % Read image from a file
-%     picturein = imread('redbull.jpg');
+%     picturein = imread('IMAGE.jpg');
     
     % Read image from an array
     % load('array_for_Bradley.mat');
@@ -61,12 +62,13 @@ function [matches, dominosactual, finalfinallines, trackingin] = detection(pictu
     %% Apply the Hough transform and process
 
     [H,theta,rho] = hough(E);
-
+    
     % Find Hough Peaks
-    P = houghpeaks(H,300,'threshold',ceil(0.3*max(H(:))));
+    P = houghpeaks(H,650,'threshold',ceil(0.3*max(H(:))));
+    % ^^ was previously 300 before so many dominos added
 
     % Find lines in image using Houghlines
-    lines = houghlines(E,theta,rho,P,'FillGap',5,'MinLength',70);
+    lines = houghlines(E,theta,rho,P,'FillGap',3,'MinLength',35);
     
     %% Commence sorting of the detected lines
 
@@ -77,7 +79,7 @@ function [matches, dominosactual, finalfinallines, trackingin] = detection(pictu
     % Variable that controls the distance that lines may be from each other
     % before being considered unrelated
     %distance = 60;
-    distance = 20;
+    distance = 10;
 
     %% Dot product function for detecting perpendicular lines. It iterates
     % through the detected lines with are stored in 'lines'. For each line,
@@ -117,8 +119,9 @@ function [matches, dominosactual, finalfinallines, trackingin] = detection(pictu
             elseif ((((ydotval2-ydotval1)/(xdotval2-xdotval1)) - ((ydotval4-ydotval3)/(xdotval4-xdotval3))) ~= 0)
                 checkendsx = ((ydotval3-xdotval3*((ydotval4-ydotval3)/(xdotval4-xdotval3))-ydotval1+xdotval1*((ydotval2-ydotval1)/(xdotval2-xdotval1)))...
                     /(((ydotval2-ydotval1)/(xdotval2-xdotval1))-((ydotval4-ydotval3)/(xdotval4-xdotval3))));
-                if ((((checkendsx < xdotval4) && (checkendsx > xdotval3)) || ((checkendsx > xdotval4) && (checkendsx < xdotval3)))...
-                        && (((checkendsx < xdotval2) && (checkendsx > xdotval1)) || ((checkendsx > xdotval2) && (checkendsx < xdotval1))))
+                if (((((checkendsx < xdotval4) && (checkendsx > xdotval3)) || ((checkendsx > xdotval4) && (checkendsx < xdotval3)))...
+                        && (((checkendsx < xdotval2) && (checkendsx > xdotval1)) || ((checkendsx > xdotval2) && (checkendsx < xdotval1)))) ...
+                        && (abs(lines(r).theta - lines(dot).theta) < 10))
                     dotproductsordered(r,dot) = -139;
                 end
             end
@@ -129,7 +132,7 @@ function [matches, dominosactual, finalfinallines, trackingin] = detection(pictu
     finallines = [];
     linkedlines = [];
     indexvalue = 1;
-    angleallowance = 10;
+    angleallowance = 15;
     rightanglethreshold = 90 - angleallowance;
     rightanglethresholdmax = 90 + angleallowance;
 
@@ -369,24 +372,28 @@ function [matches, dominosactual, finalfinallines, trackingin] = detection(pictu
             currentrow = 2;
         % If not the first domino    
         else
-            % For each entry of the current domino
-            for others = 1:dominosbutoverlapdim(1,2)
-                % Compare against every previously added domino row to new
-                % array
-                for checkprevdoms = 1:(currentdomino - 1)
-                    % Check against every entry in each domino row
-                    for checkprevdomvals = 1:dominosbutoverlapdim(1,2)
-                        % Ensure that we havent reached the zero entries
-                        if dominosbutoverlap(checkprevdoms,checkprevdomvals) ~= 0
-                            % If there is a match anywhere, the domino has
-                            % become split and must be rejoined
-                            if dominosbutoverlap(currentdomino,others) == dominosbutoverlap(checkprevdoms,checkprevdomvals)
-                                domsplit = 1;
-                                rowmatch = checkprevdoms;
+            while domsplit == 0
+                % For each entry of the current domino
+                for others = 1:dominosbutoverlapdim(1,2)
+                    % Compare against every previously added domino row to new
+                    % array
+                    dominosactualdim = size(dominosactual);
+                    for checkprevdoms = 1:dominosactualdim(1,1)
+                        % Check against every entry in each domino row
+                        for checkprevdomvals = 1:dominosactualdim(1,2)
+                            % Ensure that we havent reached the zero entries
+                            if dominosactual(checkprevdoms,checkprevdomvals) ~= 0
+                                % If there is a match anywhere, the domino has
+                                % become split and must be rejoined
+                                if dominosbutoverlap(currentdomino,others) == dominosactual(checkprevdoms,checkprevdomvals)
+                                    rowmatch = checkprevdoms;
+                                    domsplit = 1;
+                                end
                             end
                         end
                     end
                 end
+                break
             end
             % If the domino needs to be combined from separate domino rows
             if domsplit == 1
@@ -413,7 +420,7 @@ function [matches, dominosactual, finalfinallines, trackingin] = detection(pictu
                         dontadd = 0;
                         dominosbutoverlapdim = size(dominosbutoverlap);
                         for checkeach = 1:dominosbutoverlapdim(1,2)
-                            if dominosbutoverlap(rowmatch,checkeach) == dominosbutoverlap(currentdomino,addall)
+                            if dominosactual(rowmatch,checkeach) == dominosbutoverlap(currentdomino,addall)
                                 dontadd = 1;
                             end
                         end
@@ -575,6 +582,7 @@ function [matches, dominosactual, finalfinallines, trackingin] = detection(pictu
 
     longestline = [];
     mindomsize = 80;
+%     maxdomsize = 190;
     maxdomsize = 500;
 %     mindomsize = 1;
 %     maxdomsize = 500000;
