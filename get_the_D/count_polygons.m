@@ -9,7 +9,7 @@ end
 [m,n] = size(matches);
 for index = 1:m
     % Get polygons
-    [xv1, yv1, xv2, yv2] = get_polygon(index, trackingin, matches);
+    [xv1, yv1, xv2, yv2,theta] = get_polygon(index, trackingin, matches);
     
     % Left hand sided count
     [in,on] = inpolygon(xq,yq,xv1,yv1);
@@ -24,6 +24,7 @@ for index = 1:m
     % Store centers
     face_count(index, 3) = trackingin(index, 1) + 0.5 * trackingin(index, 3);
     face_count(index, 4) = trackingin(index, 2) + 0.5 * trackingin(index, 4);
+    face_count(index, 5) = theta;
 
     %plotting
     if index ~= 6 % REMOVE THIS LINE
