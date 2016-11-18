@@ -5,7 +5,7 @@ function [the_D, face_count] = get_next_domino(face_count);
 index = face_count.index;
 face_data = face_count.face_data;
 if length(face_data) < index
-    the_D = [-1,-1,-1,-1,-1];
+    the_D = [-1,-1,-1,-1];
     face_count.index = -1;
     return;  
 end
@@ -19,12 +19,15 @@ for(i = 1:length(lost))
 end
 
 if length(face_data) < index
-    the_D = [-1,-1,-1,-1,-1];
+    the_D = [-1,-1,-1,-1];
     face_count.index = -1;
     return;
 end
-the_D = lost(index,:);
-index
+lost(index,:)
+the_D(1) = lost(index,(1));
+the_D(2) = lost(index,(4));
+the_D(3) = lost(index,(5));
+the_D(4) = lost(index,(6));
 face_count.index = index;
 
 
