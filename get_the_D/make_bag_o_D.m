@@ -32,7 +32,6 @@ face_data = sortrows(face_data,1);
 for i = 1:length(face_data)
     Faces(i,:) = [face_data(i,1) face_data(i,2)];
 end
-Faces;
 field0 = 'index';
 value0 = 1;
 field1 = 'face_data';
