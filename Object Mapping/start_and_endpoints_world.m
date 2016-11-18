@@ -29,19 +29,19 @@ for i = 1:length(data(:,1))
 end
 for i = 1:length(data(:,1))
     n = data(i,1)
-    if n == 1 || n == 2 || n == 4 || n == 7 || n == 11 || n == 16 ||n == 22
+    if n == 1 || n == 3 || n == 6 || n == 10 || n == 15 || n == 21 ||n == 28
         world(i,3)=0;
-    elseif n == 3 || n == 5 || n == 8 || n == 12 || n ==17 || n = 23
+    elseif n == 2 || n == 5 || n == 9 || n == 14 || n == 20 || n == 27
         world(i,3)=0+x_spacing;
-    elseif n == 6 || n == 9 || n == 13 || n == 18 || n == 24
+    elseif n == 4 || n == 8 || n == 13 || n == 19 || n == 26
         world(i,3)=0+x_spacing*2;
-    elseif n == 10 || n == 14 || n == 19 || n == 25
+    elseif n == 7 || n == 12 || n == 18 || n == 25
         world(i,3)=0+x_spacing*3;
-    elseif n == 15 || n == 20 || n == 26
+    elseif n == 11 || n == 17 || n == 24
         world(i,3)=0+x_spacing*4;
-    elseif n == 21 || n == 27
+    elseif n == 16 || n == 23
         world(i,3)=0+x_spacing*5;
-    elseif n == 28
+    elseif n == 22
         world(i,3)=0+x_spacing*6;
     end
 end
