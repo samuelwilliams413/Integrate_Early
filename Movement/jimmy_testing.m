@@ -1,3 +1,4 @@
+
 function[] = jimmy_testing(x1,y1,z1,x2,y2,theta)
 
 loadlibrary('dynamixel','dynamixel.h');
@@ -18,21 +19,20 @@ calllib('dynamixel','dxl_write_word', 3, 32, speed);
  %motor_mover_cart(0,20,-5)
  
  init_motor_pos();
- pause(1)
- move_to_base(x1,y1,z1); %z1=-11
- pause(.5)
+ pause(4)
+ move_to_dom(x1,y1,z1)
+ pause(5)
+ move_to_point(x1,y1,z1,x2,y2)
+ %move_to_base(x1,y1,z1); %z1=-11
+ %pause(5)
+ %motor_mover_cart(0,11,-12);
+ %theta_comp = atand(theta)
+ %slip_comp*rotate(90); %-theta_comp
+ %move_from_base(x2,y2,z1);
+ %pause(0.5);
+ %init_motor_pos();
  
- disable_motor(2)
  
- 
- motor_mover_cart(0,11,-13);
- theta_comp = atand(theta)
- slip_comp*rotate(90-theta_comp);
- move_from_base(x2,y2,z1);
- pause(0.5);
- init_motor_pos();
- 
- 
-calllib('dynamixel','dxl_terminate');  
+%calllib('dynamixel','dxl_terminate');  
 %unloadlibrary('dynamixel');
 
