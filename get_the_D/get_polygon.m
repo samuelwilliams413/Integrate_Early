@@ -1,16 +1,22 @@
-function [xv1, yv1, xv2, yv2] = get_polygon(index, trackingin, matches);
+function [xv1, yv1, xv2, yv2, theta] = get_polygon(index, trackingin, matches);
 %% Set up domino orientation gradients
 x = trackingin(index, 1) + 0.5 * trackingin(index, 3);
 y = trackingin(index, 2) + 0.5 * trackingin(index, 4);
 m = (matches(index,12) - matches(index,10))/(matches(index,11) - matches(index,9));
 m = tand(atand(m));
+
+theta = atand(m);
+if (theta < 0)
+    theta = 360 +theta;
+end
+
 off = y - m*x;
 
 %% plot centerline to check orientation
-% hold on
-% x = 0:1:2000;
-% y = m*x+off;
-% plot(x, y)
+%  hold on
+%  x = 0:1:2000;
+%  y = m*x+off;
+%  plot(x, y)
 
 %% Set up dominocorners and boundaries
 BoR(1) = trackingin(index, 1);

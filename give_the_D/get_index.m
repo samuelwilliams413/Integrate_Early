@@ -4,7 +4,7 @@ R = face(2);
 index(2) = L;
 index(3) = R;
 
-if L > 4 || R > 4 || L < 0 || R < 0
+if L > 6 || R > 6 || L < 0 || R < 0
     INVALID_DOM = [face(1) face(2)]
     index(1) = -1;
     
@@ -13,14 +13,18 @@ end
 
 switch (R)
     case 0
-        index(1) = 14;
+        index(1) = 1;
     case 1
-        index(1) = 14 - (2 - L);
+        index(1) = 3 - L;
     case 2
-        index(1) = 14 - (5 - L);
+        index(1) = 6 - L;
     case 3
-        index(1) = 14 - (9 - L);
+        index(1) = 10 - L;
     case 4
-        index(1) = 14 - (14 - L);
+        index(1) = 15 - L;
+    case 5
+        index(1) = 21 - L;
+    case 6
+        index(1) = 28 - L;
 end
 end
