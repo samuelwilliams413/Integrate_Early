@@ -53,13 +53,13 @@ for i = 1:length(data(:,1))
         world(i,4)=420-y_spacing;
     elseif n == 4 || n == 5 || n == 6
         world(i,4)=420-y_spacing*2;
-    elseif n == 7 || n == 8 || n == 9 || n == 10
+    elseif data(i,3) == 3
         world(i,4)=420-y_spacing*3;
-    elseif n == 11 || n == 12 || n ==13 || n == 14 || n ==15
+    elseif data(i,3) == 4
         world(i,4)=420-y_spacing*4;
-    elseif n == 16 || n == 17 || n == 18 || n == 19 || n == 20 || n == 21
+    elseif data(i,3) == 5
         world(i,4)=420-y_spacing*5;
-    elseif n == 22 || n == 23 || n == 24 || n == 25 || n == 26 || n == 27 || n == 28
+    elseif data(i,3) == 6
         world(i,4)=420-y_spacing*6;
     end
 end
