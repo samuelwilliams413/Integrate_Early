@@ -1,10 +1,10 @@
 function [face_count] = get_face_count(image, trackingin, matches);
 % Calibration Params
 Rmin = 5;
-Rmax = 15;
+Rmax =7;
 
 % Get Circles
-[centers, radii, metric] = imfindcircles(image,[Rmin Rmax],'Sensitivity',0.73);
+[centers, radii, metric] = imfindcircles(image,[Rmin Rmax],'Sensitivity',0.9621);
 
 % Plot Circles
 viscircles(centers, radii,'EdgeColor','b');

@@ -38,6 +38,6 @@ field1 = 'face_data';
 value1 = face_data(:,:);
 
 face_count = struct(field0, value0, field1, value1);
-
+Faces
 
 end

@@ -1,4 +1,16 @@
 function [path] = get_path(start, finish, face_count)
+% [path] = get_path (start, finish, face_count)
+% path = array of the points (in order) to be visited [x,y]
+% start = intitial position [x,y]
+% finish = final desired position [x,y]
+% face_count = Sam's magic structure
+
+%% DEMO
+% start = [1 1];
+% finish = [5 5];
+% obstacles = [[2,1];[2,2];[2,3];[2,4];[2,5];[2,6];[2,8];[4,4];[4,5];[4,6];[4,7];[4,8];[4,9];[4,10];[5,4]];
+
+%% Get values
  width = 10;
  height = 10;
  
@@ -9,11 +21,13 @@ for i = 1:length(face_data)
     obstacles(i,:) = rc;
 end
 
-close all
-start = [1 1];
-finish = [5 5];
+
 %obstacles = [[2,1];[2,2];[2,3];[2,4];[2,5];[2,6];[2,8];[4,4];[4,5];[4,6];[4,7];[4,8];[4,9];[4,10];[5,4]];
 
+
+close all
+
+%% Create struct
 field0 = 'start';
 value0 = start;
 field1 = 'finish';
@@ -27,6 +41,7 @@ value4 = 10;
 
 GAME = struct(field0, value0, field1, value1, field2, value2, field3, value3, field4, value4); 
 
+%% Get path and post process
 [path] = A_Star(GAME);
 path(:,1) = path(:,1)*resolution(1);
 path(:,2) = path(:,2)*resolution(2);
