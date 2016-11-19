@@ -10,19 +10,19 @@ if x == 0
     alpha1 = 90;
     theta1 = 511;
 elseif x > 0
-    a=1
-    alpha1 = abs(atand(x/y))
-    theta1 = 511 - alpha1*ratio
+    a=1;
+    alpha1 = abs(atand(x/y));
+    theta1 = 511 - alpha1*ratio;
     if y < 0
-        theta1 = 211 -((90-alpha1)*ratio)
+        theta1 = 211 -((90-alpha1)*ratio);
     end
      
     
 elseif x < 0
-    alpha1 = abs(atand(x/y))
-    theta1 = 511 + alpha1*ratio
+    alpha1 = abs(atand(x/y));
+    theta1 = 511 + alpha1*ratio;
     if y < 0
-       theta1 = 811 + ((90 - alpha1)*ratio)
+       theta1 = 811 + ((90 - alpha1)*ratio);
     end 
 end
 
