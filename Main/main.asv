@@ -1,0 +1,22 @@
+function [] = main()
+total_sorted = 0;
+
+% Cinitialise 
+close all
+clear cam
+cam = webcam('Microsoft® LifeCam Studio(TM)');
+cam.resolution = '1920x1080';
+cam.Brightness=80;
+preview(cam);
+
+while (1)
+    
+% detect
+% get_list
+% get_next_d
+% convert
+% move_to_origin
+% rotate
+% move_to_end   
+end 
+end 
