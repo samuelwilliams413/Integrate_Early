@@ -9,7 +9,7 @@ end
 [m,n] = size(matches);
 for index = 1:m
     % Get polygons
-    [xv1, yv1, xv2, yv2,theta] = get_polygon(index, trackingin, matches);
+    [xv1, yv1, xv2, yv2,theta] = get_polygon(index, trackingin, matches)
     
     % Left hand sided count
     [in,on] = inpolygon(xq,yq,xv1,yv1);

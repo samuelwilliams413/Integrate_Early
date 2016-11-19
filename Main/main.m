@@ -35,15 +35,25 @@ while (1)
     [matches, dominos, finalfinallines, trackingin] = detection(img);
     % get_list
     if(length(matches) == 0)
+        here1=0
         continue
     end
+    
     face_count = make_bag_o_D(trackingin, matches, filename);
+    
     % get_next_d
     face_count.index = index;
     [the_D, face_count] = get_next_domino(face_count);
+    if face_count.index == -1
+        index = 1;
+       face_count.index = 1;
+       here2=0
+       continue
+   end
     index = face_count.index;
     % convert
-    [world] = start_and_endpoints_world(the_D);
+    the_D
+    [world] = start_and_endpoints_world(the_D)
     % move_to_origin
     % rotate
     % move_to_end
