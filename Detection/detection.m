@@ -1,5 +1,4 @@
-function [matches, dominosactual, finalfinallines, trackingin] = detection(picturein);
-% clear all
+function [matches, dominos, finalfinallines, trackingin] = detection(picturein);
 
     %% Bryden Page domino detection software, 2016, METR4202, The University
     % of Queensland
@@ -38,7 +37,7 @@ function [matches, dominosactual, finalfinallines, trackingin] = detection(pictu
     %% Code that is uncommented for the testing of previously stored images
     
     % Read image from a file
-%     picturein = imread('IMAGE.jpg');
+     picturein = imread('IMAGE.jpg');
     
     % Read image from an array
     % load('array_for_Bradley.mat');
