@@ -63,11 +63,11 @@ function [matches, dominos, finalfinallines, trackingin] = detection(picturein);
     [H,theta,rho] = hough(E);
     
     % Find Hough Peaks
-    P = houghpeaks(H,700,'threshold',ceil(0.3*max(H(:))));
-    % was 500 for close dominos 
+    P = houghpeaks(H,300,'threshold',ceil(0.3*max(H(:))));
+    % ^^ was previously 300 before so many dominos added
 
     % Find lines in image using Houghlines
-    lines = houghlines(E,theta,rho,P,'FillGap',3,'MinLength',40);
+    lines = houghlines(E,theta,rho,P,'FillGap',3,'MinLength',30);
     
     %% Commence sorting of the detected lines
 
@@ -78,7 +78,7 @@ function [matches, dominos, finalfinallines, trackingin] = detection(picturein);
     % Variable that controls the distance that lines may be from each other
     % before being considered unrelated
     %distance = 60;
-    distance = 7;
+    distance = 10;
 
     %% Dot product function for detecting perpendicular lines. It iterates
     % through the detected lines with are stored in 'lines'. For each line,
@@ -120,7 +120,7 @@ function [matches, dominos, finalfinallines, trackingin] = detection(picturein);
                     /(((ydotval2-ydotval1)/(xdotval2-xdotval1))-((ydotval4-ydotval3)/(xdotval4-xdotval3))));
                 if (((((checkendsx < xdotval4) && (checkendsx > xdotval3)) || ((checkendsx > xdotval4) && (checkendsx < xdotval3)))...
                         && (((checkendsx < xdotval2) && (checkendsx > xdotval1)) || ((checkendsx > xdotval2) && (checkendsx < xdotval1)))) ...
-                        && (abs(lines(r).theta - lines(dot).theta) < 15))
+                        && (abs(lines(r).theta - lines(dot).theta) < 10))
                     dotproductsordered(r,dot) = -139;
                 end
             end
@@ -131,7 +131,7 @@ function [matches, dominos, finalfinallines, trackingin] = detection(picturein);
     finallines = [];
     linkedlines = [];
     indexvalue = 1;
-    angleallowance = 20;
+    angleallowance = 15;
     rightanglethreshold = 90 - angleallowance;
     rightanglethresholdmax = 90 + angleallowance;
 
@@ -580,10 +580,11 @@ function [matches, dominos, finalfinallines, trackingin] = detection(picturein);
     % and is later useful for orientation and position
 
     longestline = [];
-%     mindomsize = 90;
-%     maxdomsize = 140;
-    mindomsize = 1;
-    maxdomsize = 500000;
+    mindomsize = 40;
+%     maxdomsize = 190;
+    maxdomsize = 140;
+%     mindomsize = 1;
+%     maxdomsize = 500000;
 
 
     for each = 1:dominosactualdim(1,1)  
