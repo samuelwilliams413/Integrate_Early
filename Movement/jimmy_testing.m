@@ -4,14 +4,14 @@ function[] = jimmy_testing(x1,y1,z1,x2,y2,theta)
 %%%%%%%%%%%%%%
 % Comment out for when running main loop
 
-loadlibrary('dynamixel','dynamixel.h');
-res = calllib('dynamixel','dxl_initialize', 17, 1);
-
-speed = 500;
-slip_comp=1;
-calllib('dynamixel','dxl_write_word', 1, 32, speed);
-calllib('dynamixel','dxl_write_word', 2, 32, speed);
-calllib('dynamixel','dxl_write_word', 3, 32, speed);
+% loadlibrary('dynamixel','dynamixel.h');
+% res = calllib('dynamixel','dxl_initialize', 17, 1);
+% 
+% speed = 500;
+% slip_comp=1;
+% calllib('dynamixel','dxl_write_word', 1, 32, speed);
+% calllib('dynamixel','dxl_write_word', 2, 32, speed);
+% calllib('dynamixel','dxl_write_word', 3, 32, speed);
 
 %%%%%%%%%%%%%%%%
 
@@ -38,6 +38,6 @@ calllib('dynamixel','dxl_write_word', 3, 32, speed);
  
  %%%%%%%%%%%%%%
 % Comment out for when running main loop 
-calllib('dynamixel','dxl_terminate');  
-unloadlibrary('dynamixel');
+% calllib('dynamixel','dxl_terminate');  
+% unloadlibrary('dynamixel');
 end

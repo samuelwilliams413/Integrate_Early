@@ -325,6 +325,7 @@ function [matches, dominos, finalfinallines, trackingin] = detection(picturein);
 
     dominodim = size(dominos);
     dominorowindex = 1;
+    dominoswithduplicates = [];
     
     % Remove dominos that have no perpendicular sides
     for eachdom = 1:dominodim(1,1)
@@ -887,7 +888,6 @@ function [matches, dominos, finalfinallines, trackingin] = detection(picturein);
     end
     
     toc
-    
 end
 
             

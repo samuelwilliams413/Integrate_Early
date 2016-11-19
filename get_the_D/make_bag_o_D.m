@@ -22,11 +22,12 @@ image = BW;
 % Get bag
 trackingin = trackingin*SCALING_FACTOR;
 matches =  matches*SCALING_FACTOR;
-[face_data] = get_face_count(image, trackingin, matches);
+[face_data] = get_face_count(image, trackingin, matches)
 
 % Sort and post process
 tmp = 0;
-for i = 1:length(face_data)
+for i = 1:length(face_data(:,1))
+    i
     if(face_data(i,1) > face_data(i,2))
         tmp = face_data(i,1);
         face_data(i,1) = face_data(i,2);
@@ -35,10 +36,6 @@ for i = 1:length(face_data)
 end
 face_data = sortrows(face_data,1);
 
-% for display
-for i = 1:length(face_data)
-    Faces(i,:) = [face_data(i,1) face_data(i,2)];
-end
 field0 = 'index';
 value0 = 1;
 field1 = 'face_data';

@@ -33,6 +33,9 @@ while (1)
     imwrite(img,filename);
     [matches, dominos, finalfinallines, trackingin] = detection(img);
     % get_list
+    if(length(matches) == 0)
+        continue
+    end
     face_count = make_bag_o_D(trackingin, matches, filename);
     % get_next_d
     [the_D, face_count] = get_next_domino(face_count);

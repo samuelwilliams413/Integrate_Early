@@ -1,7 +1,9 @@
 function [lost] = get_next_domino_list(face_count, lost);
 %% Note to self: you need to return the orienation of the domino
 %% face_count = [lowest_value_face highest_value_face middle_x middle_y]
-for i = 1:length(face_count)
+lost
+
+for i = 1:length(face_count(:,1))
     index(i,:) = get_index(face_count(i,:));
 end
 
