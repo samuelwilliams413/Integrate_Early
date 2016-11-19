@@ -2,20 +2,20 @@ function [xv1, yv1, xv2, yv2, theta] = get_polygon(index, trackingin, matches);
 %% Set up domino orientation gradients
 x = trackingin(index, 1) + 0.5 * trackingin(index, 3);
 y = trackingin(index, 2) + 0.5 * trackingin(index, 4);
-m = (matches(index,12) - matches(index,10))/(matches(index,11) - matches(index,9));
-m1 = m
-m = tand(atand(m));
-m2 = m
 
+m = (matches(index,12) - matches(index,10))/(matches(index,11) - matches(index,9));
+if isnan(m)
+    m = 0.0001;
+end
+
+m = tand(atand(m));
 theta = atand(m);
 
 if m == 0
     m = 0.0001;
 end
 
-% if isnan(m)
-%     m = 1;
-% end
+
 
 if (theta < 0)
     theta = 360 +theta;
