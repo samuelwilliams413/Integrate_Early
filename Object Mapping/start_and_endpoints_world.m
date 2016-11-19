@@ -8,6 +8,8 @@ function [ world ] = start_and_endpoints_world(data)
 ...orign at the arm base
 % sets up end points based on pyramid layout with the top (0,0) domino...
 ...directly in front of the arm at close to its max reach
+% data = [index middle_x middle_y theta]
+
 x_pixels = 1287;
 y_pixels = 724;
 x_world = 71.5;
@@ -30,7 +32,7 @@ for i = 1:length(data(:,1))
     world(i,2)=k;
 end
 for i = 1:length(data(:,1))
-    n = data(i,1)
+    n = data(i,1);
     if n == 1 || n == 3 || n == 6 || n == 10 || n == 15 || n == 21 ||n == 28
         world(i,3)=dom_1_x;
     elseif n == 2 || n == 5 || n == 9 || n == 14 || n == 20 || n == 27
@@ -48,7 +50,7 @@ for i = 1:length(data(:,1))
     end
 end
 for i = 1:length(data(:,1))
-    n = data(i,1)
+    n = data(i,1);
     if n == 1
         world(i,4) = dom_1_y;
     elseif n == 2 || n == 3

@@ -1,4 +1,4 @@
-function [img] = get_img(cam, params)
+function [img] = get_img(cam)
 hold on
 
 

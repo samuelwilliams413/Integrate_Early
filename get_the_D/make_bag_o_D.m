@@ -9,7 +9,7 @@ function [face_count] = make_bag_o_D(trackingin, matches, filename);
 SCALING_FACTOR = 2;
 
 % Preprocess Image
-close all
+%close all
 I = imread(filename);
 
 I = imresize(I,SCALING_FACTOR);
@@ -17,7 +17,7 @@ I = imresize(I,SCALING_FACTOR);
 IG= rgb2gray(I);
 BW = edge(IG,'canny', 0.1);
 image = BW;
-figure, imshow(I), hold on;
+%figure, imshow(I), hold on;
 
 % Get bag
 trackingin = trackingin*SCALING_FACTOR;
@@ -26,7 +26,7 @@ matches =  matches*SCALING_FACTOR;
 
 % Sort and post process
 tmp = 0;
-for i = 1:length(face_data)
+for i = 1:length(face_data(:,1))
     if(face_data(i,1) > face_data(i,2))
         tmp = face_data(i,1);
         face_data(i,1) = face_data(i,2);
@@ -35,10 +35,6 @@ for i = 1:length(face_data)
 end
 face_data = sortrows(face_data,1);
 
-% for display
-for i = 1:length(face_data)
-    Faces(i,:) = [face_data(i,1) face_data(i,2)];
-end
 field0 = 'index';
 value0 = 1;
 field1 = 'face_data';
