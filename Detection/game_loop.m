@@ -1,4 +1,4 @@
-function [matches, dominos, finalfinallines, trackingin] = game_loop(cameraParams)
+function [matches, dominos, finalfinallines, trackingin] = game_loop(params)
 close all
 clear cam
 
@@ -10,7 +10,7 @@ preview(cam);
 pause(5);
 
 while 1  
-    img = get_img(cam, cameraParams);
+    img = get_img(cam, params);
     imshow(img);
     imwrite(img, 'IMAGE.jpg');
 
