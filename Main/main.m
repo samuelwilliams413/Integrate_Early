@@ -24,6 +24,7 @@ cam.Brightness=80;
 filename = 'IMAGE.jpg';
 z1 = -11;
 
+index = 1;
 
 while (1)
     close all
@@ -38,7 +39,9 @@ while (1)
     end
     face_count = make_bag_o_D(trackingin, matches, filename);
     % get_next_d
+    face_count.index = index;
     [the_D, face_count] = get_next_domino(face_count);
+    index = face_count.index;
     % convert
     [world] = start_and_endpoints_world(the_D);
     % move_to_origin
