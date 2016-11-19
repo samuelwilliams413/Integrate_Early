@@ -1,11 +1,17 @@
 function [index] = get_index(face);
 L = face(1);
 R = face(2);
-index(2) = L;
+X = face(3);
+Y = face(4);
+T = face(5);
+index(2) = L;  %lower face
 index(3) = R;
+index(4) = X;
+index(5) = Y;
+index(6) = T;
 
 if L > 6 || R > 6 || L < 0 || R < 0
-    INVALID_DOM = [face(1) face(2)]
+    INVALID_DOM = [face(1) face(2)];
     index(1) = -1;
     
     return

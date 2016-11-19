@@ -14,12 +14,12 @@ for index = 1:m
     % Left hand sided count
     [in,on] = inpolygon(xq,yq,xv1,yv1);
     lFace = numel(xq(in)) + numel(xq(on));
-    face_count(index, 1) = lFace;
+    face_count(index, 1) = lFace*2;
     
     % Right hand sided count
     [in,on] = inpolygon(xq,yq,xv2,yv2);
     rFace = numel(xq(in)) + numel(xq(on));
-    face_count(index, 2) = rFace;
+    face_count(index, 2) = rFace*2;
     
     % Store centers
     face_count(index, 3) = trackingin(index, 1) + 0.5 * trackingin(index, 3);

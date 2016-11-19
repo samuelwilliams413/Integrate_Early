@@ -23,12 +23,11 @@ if length(face_data) < index
     face_count.index = -1;
     return;
 end
-lost(index,:)
 the_D(1) = lost(index,(1));
 the_D(2) = lost(index,(4));
 the_D(3) = lost(index,(5));
 the_D(4) = lost(index,(6));
-face_count.index = index;
+face_count.index = index + 1;
 
 
 end
