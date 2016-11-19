@@ -5,6 +5,12 @@ x_pixels = 1287;
 y_pixels = 724;
 x_world = 71.5;
 y_world = 40.5;
+=======
+x_pixels = 1261;
+y_pixels = 698;
+x_world = 69.5;
+y_world = 39.5;
+>>>>>>> origin/master
 
 x_mm_per_pix = x_world/x_pixels;
 y_mm_per_pix = y_world/y_pixels;
