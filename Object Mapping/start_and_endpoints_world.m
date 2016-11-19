@@ -8,17 +8,17 @@ function [ world ] = start_and_endpoints_world(data)
 ...orign at the arm base
 % sets up end points based on pyramid layout with the top (0,0) domino...
 ...directly in front of the arm at close to its max reach
-x_pixels = 1286.4;
-y_pixels = 723.6;
-x_world = 695;
-y_world = 395;
-origin_offset = 60;
+x_pixels = 1261;
+y_pixels = 698;
+x_world = 69.5;
+y_world = 39.5;
+origin_offset = 6.0;
 
 x_mm_per_pix = x_world/x_pixels;
 y_mm_per_pix = y_world/y_pixels;
 
-x_spacing = 55;
-y_spacing = 30;
+x_spacing = 5.5;
+y_spacing = 3.0;
 
 world = [];
 for i = 1:length(data(:,1))
