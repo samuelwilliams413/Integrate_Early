@@ -32,7 +32,7 @@ for i = 1:length(data(:,1))
     world(i,2)=k;
 end
 for i = 1:length(data(:,1))
-    n = data(i,1)
+    n = data(i,1);
     if n == 1 || n == 3 || n == 6 || n == 10 || n == 15 || n == 21 ||n == 28
         world(i,3)=dom_1_x;
     elseif n == 2 || n == 5 || n == 9 || n == 14 || n == 20 || n == 27
@@ -50,7 +50,7 @@ for i = 1:length(data(:,1))
     end
 end
 for i = 1:length(data(:,1))
-    n = data(i,1)
+    n = data(i,1);
     if n == 1
         world(i,4) = dom_1_y;
     elseif n == 2 || n == 3

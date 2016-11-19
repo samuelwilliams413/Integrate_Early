@@ -580,10 +580,10 @@ function [matches, dominos, finalfinallines, trackingin] = detection(picturein);
     % and is later useful for orientation and position
 
     longestline = [];
-%     mindomsize = 90;
-%     maxdomsize = 140;
-    mindomsize = 1;
-    maxdomsize = 500000;
+    mindomsize = 90;
+    maxdomsize = 140;
+%     mindomsize = 1;
+%     maxdomsize = 500000;
 
 
     for each = 1:dominosactualdim(1,1)  
@@ -630,7 +630,7 @@ function [matches, dominos, finalfinallines, trackingin] = detection(picturein);
     for drawboxes = 1:dominosactualdim(1,1)
         % Uses geometry to find the length across the diagonal of a
         % bounding box as this is longer than any one side may have been.
-        currentsize = ((abs(bounds(drawboxes,3)-bounds(drawboxes,1)))^2 + (abs(bounds(drawboxes,2)-bounds(drawboxes,4)))^2)^0.5
+        currentsize = ((abs(bounds(drawboxes,3)-bounds(drawboxes,1)))^2 + (abs(bounds(drawboxes,2)-bounds(drawboxes,4)))^2)^0.5;
         if (currentsize > mindomsize) && (currentsize < maxdomsize)
             for check = 1:5    
                 filteredonly(filtered,check) = bounds(drawboxes,check);
@@ -843,7 +843,7 @@ function [matches, dominos, finalfinallines, trackingin] = detection(picturein);
             if matches(midfinder,5) > matches(midfinder,9) || matches(midfinder,5) > matches(midfinder,11) ...
                     || matches(midfinder,7) > matches(midfinder,9) || matches(midfinder,7) > matches(midfinder,11) ...
                     matches(midfinder,6) > matches(midfinder,10) || matches(midfinder,6) > matches(midfinder,12) ...
-                    || matches(midfinder,8) > matches(midfinder,10) || matches(midfinder,8) > matches(midfinder,12)
+                    || matches(midfinder,8) > matches(midfinder,10) || matches(midfinder,8) > matches(midfinder,12);
                 matches(midfinder,13) = round(newx - (matches(midfinder,11)-matches(midfinder,9))/2);
                 matches(midfinder,14) = round(newy - (matches(midfinder,12)-matches(midfinder,10))/2);
             else

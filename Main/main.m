@@ -1,17 +1,32 @@
 function [] = main()
 total_sorted = 0;
 
+%Jimmy initialiser
+loadlibrary('dynamixel','dynamixel.h');
+res = calllib('dynamixel','dxl_initialize', 17, 1);
+
+speed = 500;
+slip_comp=1;
+calllib('dynamixel','dxl_write_word', 1, 32, speed);
+calllib('dynamixel','dxl_write_word', 2, 32, speed);
+calllib('dynamixel','dxl_write_word', 3, 32, speed);
+
+init_motor_pos_up();
+pause(3);
+
 % Camera initialiser
 close all
 clear cam
 cam = webcam('Microsoft® LifeCam Studio(TM)');
 cam.resolution = '1920x1080';
 cam.Brightness=80;
-preview(cam);
+% preview(cam);
 filename = 'IMAGE.jpg';
 z1 = -11;
 
+
 while (1)
+    close all
     % detect
     img = get_img(cam);
     imshow(img);
@@ -32,6 +47,7 @@ while (1)
     y2 = world(4);
     theta = the_D(4);
     jimmy_testing(x1,y1,z1,x2,y2,theta);
-    
+    init_motor_pos_up()
+    pause(10);
 end
 end

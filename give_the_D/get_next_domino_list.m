@@ -4,9 +4,16 @@ function [lost] = get_next_domino_list(face_count, lost);
 for i = 1:length(face_count)
     index(i,:) = get_index(face_count(i,:));
 end
-for i = 1:length(index)
-    for j = 1:length(lost)
-        if(lost(j,:) == index(i,:) )
+
+l_lost = length(lost(:,1))
+l_index = length(index(:,1))
+
+for i = 1:length(index(:,1))
+    for j = 1:length(lost(:,1))
+        ij = [i j]
+        ii = index(i,:) 
+        jj = lost(j,:)
+        if(lost(j,:) == index(i,:))
             index(i,1) = intmax;
         end
     end

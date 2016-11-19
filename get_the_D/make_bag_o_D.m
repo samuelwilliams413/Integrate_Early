@@ -9,7 +9,7 @@ function [face_count] = make_bag_o_D(trackingin, matches, filename);
 SCALING_FACTOR = 2;
 
 % Preprocess Image
-close all
+%close all
 I = imread(filename);
 
 I = imresize(I,SCALING_FACTOR);
@@ -17,7 +17,7 @@ I = imresize(I,SCALING_FACTOR);
 IG= rgb2gray(I);
 BW = edge(IG,'canny', 0.1);
 image = BW;
-figure, imshow(I), hold on;
+%figure, imshow(I), hold on;
 
 % Get bag
 trackingin = trackingin*SCALING_FACTOR;

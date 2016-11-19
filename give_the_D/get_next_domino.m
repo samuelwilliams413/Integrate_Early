@@ -9,9 +9,10 @@ if length(face_data) < index
     face_count.index = -1;
     return;  
 end
+lengthofthething = length(face_data)
 lost = zeros(length(face_data),6);
 [lost] = get_next_domino_list(face_data, lost);
-
+lost = lost
 for(i = 1:length(lost))
     if(lost(i,1) == -1)
         index = index+1;

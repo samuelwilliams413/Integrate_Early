@@ -13,7 +13,7 @@ origin_offset = 7.5;
 start_mid_x_mm = (mid_x*x_mm_per_pix)-(x_world*0.5)-3.5;
 start_mid_y_mm = (y_pixels-mid_y)*y_mm_per_pix+origin_offset-2.3;
 
-startpoints_world = [start_mid_x_mm,start_mid_y_mm]
+startpoints_world = [start_mid_x_mm,start_mid_y_mm];
 
 end
 
