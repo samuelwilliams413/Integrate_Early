@@ -27,7 +27,6 @@ for index = 1:m
     face_count(index, 5) = theta;
 
     %plotting
-    if index ~= 6 % REMOVE THIS LINE
         plot(face_count(index, 3), face_count(index, 4),'g+','LineWidth',2);
         plot(xv1,yv1,'LineWidth',2,'Color','y');
         axis equal;
@@ -35,6 +34,5 @@ for index = 1:m
         plot(xv2,yv2,'LineWidth',2,'Color','b');
         axis equal;
         hold on;
-    end
 end
 end

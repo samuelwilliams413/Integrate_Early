@@ -6,15 +6,22 @@ function [face_count] = make_bag_o_D(trackingin, matches, filename);
 %filename = 'redbull2.jpg'
 %% face_count = [lowest_value_face highest_value_face middle_x middle_y orientation]
 
+SCALING_FACTOR = 2;
+
 % Preprocess Image
 close all
 I = imread(filename);
+
+I = imresize(I,SCALING_FACTOR);
+
 IG= rgb2gray(I);
 BW = edge(IG,'canny', 0.1);
 image = BW;
 figure, imshow(I), hold on;
 
 % Get bag
+trackingin = trackingin*SCALING_FACTOR;
+matches =  matches*SCALING_FACTOR;
 [face_data] = get_face_count(image, trackingin, matches);
 
 % Sort and post process
@@ -35,7 +42,7 @@ end
 field0 = 'index';
 value0 = 1;
 field1 = 'face_data';
-value1 = face_data(:,:);
+value1 = face_data(:,:)*(1/SCALING_FACTOR);
 
 face_count = struct(field0, value0, field1, value1);
 Faces

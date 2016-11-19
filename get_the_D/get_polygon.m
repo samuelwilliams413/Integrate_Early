@@ -91,13 +91,11 @@ if(m < 0 && abs(atand(m)) > 45)
 end
 
 %% Plot corner points
-if index ~= 6 % REMOVE THIS LINE
     plot(BoR(1), BoR(2),'r+','LineWidth',2); % B || L
     plot(TL(1), TL(2),'b*','LineWidth',2); % TL
     plot(TR(1), TR(2),'ro','LineWidth',2); % TR
     plot(ToL(1), ToL(2),'r*','LineWidth',2); % T || L
     plot(BL(1), BL(2),'go','LineWidth',2); % BL
     plot(BR(1), BR(2),'y*','LineWidth',2); % BR
-end
 
 end
