@@ -23,8 +23,6 @@ cam.Brightness=80;
 % preview(cam);
 filename = 'IMAGE.jpg';
 z1 = -11;
-b_x1 = 0;
-b_y1 = 13;
 
 index = 1;
 
@@ -36,9 +34,8 @@ while (1)
     imwrite(img,filename);
     [matches, dominos, finalfinallines, trackingin] = detection(img);
     % get_list
-    
     if(length(matches) == 0)
-        here1 = 0;
+        here1=0
         continue
     end
     
@@ -49,10 +46,10 @@ while (1)
     [the_D, face_count] = get_next_domino(face_count);
     if face_count.index == -1
         index = 1;
-        face_count.index = 1;
-        here2=0
-        continue
-    end
+       face_count.index = 1;
+       here2=0
+       continue
+   end
     index = face_count.index;
     % convert
     the_D
@@ -65,10 +62,8 @@ while (1)
     x2 = world(3);
     y2 = world(4);
     theta = the_D(4);
-    jimmy_testing(x1,y1,z1,b_x1,b_y1);
-    pause(5);
-    rotate(theta);
-    jimmy_testing(b_x1,b_y1,z1,x2,y2);
+    jimmy_testing(x1,y1,z1,x2,y2,theta);
+    
     init_motor_pos_up();
     pause(10);
 end

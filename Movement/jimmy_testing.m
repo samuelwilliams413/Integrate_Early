@@ -1,5 +1,5 @@
 
-function[] = jimmy_testing(x1,y1,z1,x2,y2,theta)
+function[] = jimmy_testing(x1,y1,z1,x2,y2)
 
 %%%%%%%%%%%%%%
 % Comment out for when running main loop
@@ -20,6 +20,8 @@ function[] = jimmy_testing(x1,y1,z1,x2,y2,theta)
 %end
 
  %motor_mover_cart(0,20,-5)
+ 
+ 
  init_motor_pos();
  pause(4)
  
@@ -27,6 +29,8 @@ function[] = jimmy_testing(x1,y1,z1,x2,y2,theta)
  pause(5)
  
  move_to_point(x1,y1,z1,x2,y2);
+ 
+ 
  %move_to_base(x1,y1,z1); %z1=-11
  %pause(5)
  %motor_mover_cart(0,11,-12);
@@ -36,7 +40,7 @@ function[] = jimmy_testing(x1,y1,z1,x2,y2,theta)
  %pause(0.5);
  %init_motor_pos();
  
- %%%%%%%%%%%%%%
+ %%%%%%%%%%%%%
 % Comment out for when running main loop 
 % calllib('dynamixel','dxl_terminate');  
 % unloadlibrary('dynamixel');
