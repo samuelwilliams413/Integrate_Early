@@ -22,6 +22,7 @@ pause(3);
 % Camera initialiser
 close all
 clear cam
+a=1
 cam = webcam('Microsoft® LifeCam Studio(TM)');
 cam.resolution = '1920x1080';
 cam.Brightness=80;
@@ -73,12 +74,12 @@ while (1)
     prez_y = b_y1;
     dynamixel_running()
 %     pause(4)
-
-    motor_mover_cart(0,10,-12)
-    dynamixel_running()
     
-    %theta_comp = atand(y2/x2)
-    rotate(theta)%-theta_comp); %this needs to change BRADLEY PLS
+    
+    %motor_mover_cart(0,10,-12)
+    %dynamixel_running()
+    
+    %rotate(theta);
     dynamixel_running()
 %     pause(4)
     
