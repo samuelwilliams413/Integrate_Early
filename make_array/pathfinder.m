@@ -33,5 +33,16 @@ for i = 1:length(obstacles(:,1))
         obstacles(i,:) = [];
     end
 end
+
+ii = 1;
+for i = 1:length(obstacles(:,1))
+    if ((obstacles(i,1) == finish(1)) && (obstacles(i,2) == finish(1)))
+        continue
+    end
+    tmp_ob(ii,:) = obstacles(i,:);
+    ii = ii + 1;
+end
+obstacles = tmp_ob;
+
 path = get_path(start, finish, obstacles);
 end

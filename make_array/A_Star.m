@@ -48,7 +48,7 @@ plot(xval+.5,yval+.5,'gd');
 text(xval+1,yval+.5,'Target')
 
 %% Obstacles
- for i = 1:length(obstacles)
+ for i = 1:length(obstacles(:,1))
     xval= obstacles(i,1);
     yval= obstacles(i,2);
     MAP(xval,yval)=-1;%Put on the closed list as well

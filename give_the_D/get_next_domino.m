@@ -32,7 +32,13 @@ end
 the_D(1) = lost(index,(1));
 the_D(2) = lost(index,(4));
 the_D(3) = lost(index,(5));
-the_D(4) = lost(index,(6));
+the_D(4) = lost(index,(6)) + 90;
+
+the_D(4) = the_D(4);
+if(the_D(4) < 0)
+    the_D(4) = 360 + the_D(4);
+end
+
 face_count.index = index + 1;
 
 if the_D == [0,0,0,0]

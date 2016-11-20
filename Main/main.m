@@ -86,15 +86,14 @@ while (1)
         continue
     end
     figure();
-    % move_t
-    o_origin
+    % move_to_origin
     % rotate
     % move_to_end
     x1 = world(1);
     y1 = world(2);
     x2 = world(3);
     y2 = world(4);
-    theta = the_D(4);
+    theta = the_D(4)
     OI_BRADLEY = [x1 y1;x2 y2]
     pause(2)
     % RYAN LOOK HERE
