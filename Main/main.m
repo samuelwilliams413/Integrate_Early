@@ -11,7 +11,7 @@ calllib('dynamixel','dxl_write_word', 1, 32, speed);
 calllib('dynamixel','dxl_write_word', 2, 32, speed);
 calllib('dynamixel','dxl_write_word', 3, 32, speed);
 
-z1 = -11;
+z1 = -10;
 prez_x = 1000;
 prez_y = 1000;
 b_x1 = 0;
@@ -22,7 +22,6 @@ pause(3);
 % Camera initialiser
 close all
 clear cam
-a=1
 cam = webcam('Microsoft® LifeCam Studio(TM)');
 cam.resolution = '1920x1080';
 cam.Brightness=80;
@@ -57,6 +56,8 @@ while (1)
         continue
     end
     index = face_count.index;
+    
+    
     % convert
     the_D
     [world] = start_and_endpoints_world(the_D)
@@ -74,7 +75,6 @@ while (1)
     prez_y = b_y1;
     dynamixel_running()
 %     pause(4)
-    
     
     %motor_mover_cart(0,10,-12)
     %dynamixel_running()
