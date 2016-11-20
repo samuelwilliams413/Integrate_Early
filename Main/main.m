@@ -49,17 +49,34 @@ while (1)
     
     % get_next_d
     face_count.index = index;
-    [the_D, face_count] = get_next_domino(face_count);
-    if face_count.index == -1
-        index = 1;
-        face_count.index = 1;
-        here2=0
-        continue
+    
+    % Check that the arm can reach the domino, else re-detect
+    % Initially set it that he cannot reach, and check until he can
+    verified = [0];
+    while verified(1,1) == 0
+        % Get the domino values in pixels
+        [the_D, face_count] = get_next_domino(face_count);
+        if face_count.index == -1
+            index = 1;
+            face_count.index = 1;
+            here2=0
+            continue
+        end
+        index = face_count.index;
+        % Convert the domino to cm's
+        the_D
+        [world] = start_and_endpoints_world(the_D)
+
+        % Check if Jimmy can reach the domino
+        [verified] = deadzone(world);
+       
+        % Incase it doesn't break the loop properly
+        if verified(1,1) == 1
+            break
+        end
+        
     end
-    index = face_count.index;
-    % convert
-    the_D
-    [world] = start_and_endpoints_world(the_D)
+    
     % move_to_origin
     % rotate
     % move_to_end
