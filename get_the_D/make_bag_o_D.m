@@ -29,7 +29,7 @@ tmp = 0;
 
 
 for i = 1:length(face_data(:,1))
-    twist_array =  [face_data(i,1)/2 face_data(i,2)/2 face_data(i,6)  face_data(i,7) face_data(i,5)];
+    twist_array =  [face_data(i,1)/2 face_data(i,2)/2 face_data(i,6)  face_data(i,7) face_data(i,5)]
     if(face_data(i,1) > face_data(i,2))
         tmp = face_data(i,1);
         face_data(i,1) = face_data(i,2);
@@ -54,7 +54,7 @@ for i = 1:length(face_data(:,1))
     end
     
     % TL
-    if ((twist_array(3) == 0) && (twist_array(4) == 0))
+    if ((twist_array(3) == 1) && (twist_array(4) == 0))
         while((twist_array(5) > 360) || (twist_array(5) < 270))
             twist_array(5) = mod((twist_array(5) + 90),360);
         end
@@ -68,8 +68,8 @@ for i = 1:length(face_data(:,1))
     end
     
     % BL
-    if ((twist_array(3) == 1) && (twist_array(4) == 0))
-        while((twist_array(5) > 90) || (twist_array(5) < 0))
+    if ((twist_array(3) == 0) && (twist_array(4) == 0))
+        while((twist_array(5) > 360) || (twist_array(5) < 270))
             twist_array(5) = mod((twist_array(5) + 90),360);
         end
     end
@@ -82,7 +82,7 @@ for i = 1:length(face_data(:,1))
     end
     face_data(i, 5) = twist_array(5);
 end
-
+the_angle_found = face_data(:, 5)
 face_data(:, 5) = face_data(:, 5)*SCALING_FACTOR;
 face_data = sortrows(face_data,1);
 

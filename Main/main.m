@@ -32,6 +32,7 @@ index = 1;
 
 while (1)
     here2 = 1;
+    path = [0 0];
     
     % detect
     img = get_img(cam);
@@ -56,56 +57,62 @@ while (1)
     % Initially set it that he cannot reach, and check until he can
     verified = [0];
     while verified(1,1) == 0
-        [the_D, face_count] = get_next_domino(face_count);
-        if face_count.index == -1
-            continue
-        end
-        [world] = start_and_endpoints_world(the_D);
-        
-        while ~not_already_good(world, the_D(4))
+        while verified(1,1) == 0
             [the_D, face_count] = get_next_domino(face_count);
             if face_count.index == -1
                 continue
             end
             [world] = start_and_endpoints_world(the_D);
+            
+            while ~not_already_good(world, the_D(4))
+                [the_D, face_count] = get_next_domino(face_count);
+                if face_count.index == -1
+                    continue
+                end
+                [world] = start_and_endpoints_world(the_D);
+            end
+            if face_count.index == -1
+                continue
+            end
+            
+            % Check if Jimmy can reach the domino
+            [verified] = deadzone_custom(world);
+            
+            % Incase it doesn't break the loop properly
+            if verified(1,1) == 1
+                break
+            end
+            
         end
-        if face_count.index == -1
+        
+        if here2 == 0
             continue
         end
-        
-        % Check if Jimmy can reach the domino
-        [verified] = deadzone_custom(world);
-        
-        % Incase it doesn't break the loop properly
-        if verified(1,1) == 1
-            break
-        end
-        
-    end
-    if here2 == 0
-        continue
-    end
-    figure();
-    % move_to_origin
-    % rotate
-    % move_to_end
-    x1 = world(1);
-    y1 = world(2);
-    x2 = world(3);
-    y2 = world(4);
-    theta = the_D(4)
-    OI_BRADLEY = [x1 y1;x2 y2]
-    pause(2)
-    % RYAN LOOK HERE
-    BASE = [40 10];
-    A_start = [x1+40 y1];
-    B_finish = [x2+40 y2];
-    [path] =  pathfinder (A_start, BASE, face_count)*5 ;
-    if length(path(:,1)) == 1
-        if path == ([-1 -1]*5)
-            init_motor_pos_up();
-            pause(5);
-            continue
+        figure();
+        % move_to_origin
+        % rotate
+        % move_to_end
+        x1 = world(1);
+        y1 = world(2);
+        x2 = world(3);
+        y2 = world(4);
+        theta = the_D(4)
+        OI_BRADLEY = [x1 y1;x2 y2]
+        pause(2)
+        % RYAN LOOK HERE
+        BASE = [40 10];
+        A_start = [x1+40 y1];
+        B_finish = [x2+40 y2];
+        [path] =  pathfinder (A_start, BASE, face_count)*5 ;
+        if length(path(:,1)) == 1
+            if path == ([-1 -1]*5)
+                init_motor_pos_up();
+                pause(5);
+                verified(1,1) = 0;
+                h=msgbox('Sorry, No path exists to the Target!','warn');
+                uiwait(h,5);
+                continue
+            end
         end
     end
     path = [A_start; path; BASE];

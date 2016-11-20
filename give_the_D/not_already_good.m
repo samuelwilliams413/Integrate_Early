@@ -18,6 +18,8 @@ if ((abs(90-theta) < ANGLE_TOL) || abs(90-(360 - theta)) < ANGLE_TOL)
         return;
     end
     
+    XY_IS_BAD = xy
+    
     
 end
 ANGLEISBAD = [theta (360-theta)]
