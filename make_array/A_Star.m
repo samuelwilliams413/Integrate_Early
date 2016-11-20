@@ -4,6 +4,16 @@ function [path] = A_Star(GAME);
 start = GAME.start;
 finish  = GAME.finish;
 obstacles  = GAME.obstacles;
+index = 1;
+for i = 1:length(obstacles(:,1))
+   if ((finish(1) == obstacles(i,1)) && (finish(2) == obstacles(i,2)))
+       continue
+   end
+   tmp_obstacles(index,:) = obstacles(i,:);
+   index = index +1;
+end
+obstacles = tmp_obstacles;
+
 height  = GAME.height;
 width  = GAME.width;
 
