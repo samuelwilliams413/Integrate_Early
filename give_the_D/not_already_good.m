@@ -7,7 +7,7 @@ theta_test = mod(theta_test,180);
 if ((abs(theta_test) < ANGLE_TOL) || (abs(180-theta_test) < ANGLE_TOL))
     
     %check angle
-    ANGLEISGOOD = [theta_test];
+    ANGLE_IS_GOOD = [theta_test];
     
     % check xy
     x_diff = abs(world(1) - world(3));

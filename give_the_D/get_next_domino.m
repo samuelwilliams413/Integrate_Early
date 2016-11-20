@@ -45,7 +45,7 @@ if(the_D(4) > 360)
     the_D(4) = mod(the_D(4),360);
 end
 %HERE
-theta_found = the_D(4);
+theta_found = the_D(4)
 face_count.index = index + 1;
 
 if the_D == [0,0,0,0]

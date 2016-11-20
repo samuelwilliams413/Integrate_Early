@@ -94,7 +94,7 @@ for i = 1:length(face_data(:,1))
     face_data(i, 5) = twist_array(4);
     printpls = [face_data(i,1) face_data(i,2) face_data(i,5) face_data(i,6)];
 end
-% the_angle_found = [face_data(:,1)/2 face_data(:,2)/2 face_data(:, 5) face_data(:,6)]
+ the_angle_found = [face_data(:,1)/2 face_data(:,2)/2 face_data(:, 5) face_data(:,6)]
 face_data(:, 5) = face_data(:, 5)*SCALING_FACTOR;
 face_data = sortrows(face_data,1);
 

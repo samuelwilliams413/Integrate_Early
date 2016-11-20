@@ -23,9 +23,16 @@ for i = 1:length(Array)-1
     x2 = Array(i+1,1);
     y2 = Array(i+1,2);
     
-    jimmy_testing(prez_x, prez_y, x1, y1, z1, x2, y2);
-    prez_x = x2;
-    prez_y = y2;
+    if x1 == x2 || y1 == y2
+        jimmy_testing(prez_x, prez_y, x1, y1, z1, x2, y2);
+        prez_x = x2;
+        prez_y = y2;
+    else 
+        jimmy_testing_diag(prez_x, prez_y, x1, y1, z1, x2, y2);
+        prez_x = x2;
+        prez_y = y2;
+    end
+        
     
 end
 
