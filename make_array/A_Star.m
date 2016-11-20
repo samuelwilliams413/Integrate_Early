@@ -3,7 +3,7 @@ function [path] = A_Star(GAME);
 %% Initialise Variables
 start = GAME.start;
 finish  = GAME.finish;
-obstacles  = GAME.obstacles;
+obstacles  = GAME.obstacles
 height  = GAME.height;
 width  = GAME.width;
 

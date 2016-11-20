@@ -25,6 +25,9 @@ start = floor(start/5);
 finish =  floor(finish/5);
 obstacles =  floor(obstacles/5);
 % obstacles = [obstacles; [4 2]];
+
+deadzone = get_deadzone();
+obstacles = [obstacles; deadzone];
 for i = 1:length(obstacles(:,1))
     if (obstacles(i,1) == 0 || obstacles(i,2) == 0)
         obstacles(i,:) = [];
