@@ -65,6 +65,7 @@ while (1)
             [world] = start_and_endpoints_world(the_D);
             
             while ~not_already_good(world, the_D(4))
+                getting_a_new_domino_things_are_good = 1
                 [the_D, face_count] = get_next_domino(face_count);
                 if face_count.index == -1
                     continue
@@ -127,13 +128,9 @@ while (1)
     theta2 = atand(x1/y1)
     theta3 = atand(x2/y2)
     
-    phi = theta1 + theta2 - theta3
-    if phi < 0
-        phi = 360+phi
-    end
-    if phi > 360
-        phi = phi - 360
-    end
+    phi = theta1 + theta2 - theta3 + 360 + 360;
+    phi = mod(phi,360)
+    
     rotate(phi)
     
     [path] =  pathfinder (BASE, B_finish, face_count)*5 ;

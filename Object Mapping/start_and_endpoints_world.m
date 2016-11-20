@@ -20,7 +20,7 @@ x_cm_per_pix = x_world/x_pixels;
 y_cm_per_pix = y_world/y_pixels;
 
 dom_1_x = 0;
-dom_1_y = 36;
+dom_1_y = 34;
 x_spacing = 5.5;
 y_spacing = 3.0;
 
