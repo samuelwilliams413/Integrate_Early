@@ -1,10 +1,10 @@
-function [img] = get_img(cam, params)
+function [img] = get_img(cam)
 hold on
 
 
 img = snapshot(cam);
-img = undistortImage(img,params);
-img = imcrop(img,[20,20,1880,1040]);
+%img = undistortImage(img,params);
+%img = imcrop(img,[20,20,1880,1040]);
 img = imresize(img,0.67);
 
 

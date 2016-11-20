@@ -1,5 +1,4 @@
-function [matches, dominosactual, finalfinallines, trackingin] = detection(picturein);
-% clear all
+function [matches, dominos, finalfinallines, trackingin] = detection(picturein);
 
     %% Bryden Page domino detection software, 2016, METR4202, The University
     % of Queensland
@@ -64,11 +63,11 @@ function [matches, dominosactual, finalfinallines, trackingin] = detection(pictu
     [H,theta,rho] = hough(E);
     
     % Find Hough Peaks
-    P = houghpeaks(H,650,'threshold',ceil(0.3*max(H(:))));
-    % ^^ was previously 300 before so many dominos added
+    P = houghpeaks(H,700,'threshold',ceil(0.3*max(H(:))));
+    % was 500 for close dominos 
 
     % Find lines in image using Houghlines
-    lines = houghlines(E,theta,rho,P,'FillGap',3,'MinLength',35);
+    lines = houghlines(E,theta,rho,P,'FillGap',3,'MinLength',40);
     
     %% Commence sorting of the detected lines
 
@@ -79,7 +78,7 @@ function [matches, dominosactual, finalfinallines, trackingin] = detection(pictu
     % Variable that controls the distance that lines may be from each other
     % before being considered unrelated
     %distance = 60;
-    distance = 10;
+    distance = 7;
 
     %% Dot product function for detecting perpendicular lines. It iterates
     % through the detected lines with are stored in 'lines'. For each line,
@@ -121,7 +120,7 @@ function [matches, dominosactual, finalfinallines, trackingin] = detection(pictu
                     /(((ydotval2-ydotval1)/(xdotval2-xdotval1))-((ydotval4-ydotval3)/(xdotval4-xdotval3))));
                 if (((((checkendsx < xdotval4) && (checkendsx > xdotval3)) || ((checkendsx > xdotval4) && (checkendsx < xdotval3)))...
                         && (((checkendsx < xdotval2) && (checkendsx > xdotval1)) || ((checkendsx > xdotval2) && (checkendsx < xdotval1)))) ...
-                        && (abs(lines(r).theta - lines(dot).theta) < 10))
+                        && (abs(lines(r).theta - lines(dot).theta) < 15))
                     dotproductsordered(r,dot) = -139;
                 end
             end
@@ -132,7 +131,7 @@ function [matches, dominosactual, finalfinallines, trackingin] = detection(pictu
     finallines = [];
     linkedlines = [];
     indexvalue = 1;
-    angleallowance = 15;
+    angleallowance = 20;
     rightanglethreshold = 90 - angleallowance;
     rightanglethresholdmax = 90 + angleallowance;
 
@@ -326,6 +325,7 @@ function [matches, dominosactual, finalfinallines, trackingin] = detection(pictu
 
     dominodim = size(dominos);
     dominorowindex = 1;
+    dominoswithduplicates = [];
     
     % Remove dominos that have no perpendicular sides
     for eachdom = 1:dominodim(1,1)
@@ -581,9 +581,8 @@ function [matches, dominosactual, finalfinallines, trackingin] = detection(pictu
     % and is later useful for orientation and position
 
     longestline = [];
-    mindomsize = 80;
-%     maxdomsize = 190;
-    maxdomsize = 500;
+    mindomsize = 90;
+    maxdomsize = 140;
 %     mindomsize = 1;
 %     maxdomsize = 500000;
 
@@ -632,7 +631,7 @@ function [matches, dominosactual, finalfinallines, trackingin] = detection(pictu
     for drawboxes = 1:dominosactualdim(1,1)
         % Uses geometry to find the length across the diagonal of a
         % bounding box as this is longer than any one side may have been.
-        currentsize = ((abs(bounds(drawboxes,3)-bounds(drawboxes,1)))^2 + (abs(bounds(drawboxes,2)-bounds(drawboxes,4)))^2)^0.5
+        currentsize = ((abs(bounds(drawboxes,3)-bounds(drawboxes,1)))^2 + (abs(bounds(drawboxes,2)-bounds(drawboxes,4)))^2)^0.5;
         if (currentsize > mindomsize) && (currentsize < maxdomsize)
             for check = 1:5    
                 filteredonly(filtered,check) = bounds(drawboxes,check);
@@ -845,7 +844,7 @@ function [matches, dominosactual, finalfinallines, trackingin] = detection(pictu
             if matches(midfinder,5) > matches(midfinder,9) || matches(midfinder,5) > matches(midfinder,11) ...
                     || matches(midfinder,7) > matches(midfinder,9) || matches(midfinder,7) > matches(midfinder,11) ...
                     matches(midfinder,6) > matches(midfinder,10) || matches(midfinder,6) > matches(midfinder,12) ...
-                    || matches(midfinder,8) > matches(midfinder,10) || matches(midfinder,8) > matches(midfinder,12)
+                    || matches(midfinder,8) > matches(midfinder,10) || matches(midfinder,8) > matches(midfinder,12);
                 matches(midfinder,13) = round(newx - (matches(midfinder,11)-matches(midfinder,9))/2);
                 matches(midfinder,14) = round(newy - (matches(midfinder,12)-matches(midfinder,10))/2);
             else
@@ -889,7 +888,6 @@ function [matches, dominosactual, finalfinallines, trackingin] = detection(pictu
     end
     
     toc
-    
 end
 
             
