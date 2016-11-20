@@ -47,10 +47,6 @@ BR(2) = trackingin(index, 2) + trackingin(index, 4);
 BL(1) = trackingin(index, 1);
 BL(2) = trackingin(index, 2) + trackingin(index, 4);
 
-m = m
-TL2 = TL(2)
-BL2 = BL(2)
-
 
 %% Create Polygon Arrays and Handle Special Cases
 if(atand(m) > 45)

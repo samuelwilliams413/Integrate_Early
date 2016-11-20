@@ -17,7 +17,7 @@ I = imresize(I,SCALING_FACTOR);
 IG= rgb2gray(I);
 BW = edge(IG,'canny', 0.1);
 image = BW;
-%figure, imshow(I), hold on;
+%  figure, imshow(I), hold on;
 
 % Get bag
 trackingin = trackingin*SCALING_FACTOR;
@@ -31,9 +31,12 @@ for i = 1:length(face_data(:,1))
         tmp = face_data(i,1);
         face_data(i,1) = face_data(i,2);
         face_data(i,2) = tmp;
+
     end
+
 end
 face_data = sortrows(face_data,1);
+LR = [face_data(:,1)  face_data(:,2)]
 
 field0 = 'index';
 value0 = 1;
