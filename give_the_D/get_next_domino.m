@@ -36,7 +36,7 @@ the_D(3) = lost(index,(5));
 %HERE
 the_D(4) = lost(index,(6));
 
-the_D(4) = the_D(4);
+the_D(4) = the_D(4) + 90;
 if(the_D(4) < 0)
     the_D(4) = 360 + the_D(4);
 end

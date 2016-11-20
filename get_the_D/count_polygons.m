@@ -33,9 +33,9 @@ for index = 1:m
     LRT = [lFace rFace theta];
     
     if (rFace*2 > lFace*2) % lFace is the little face
-        LR = 1
+        LR = 1;
     else % rFace is the little face
-        LR = 0
+        LR = 0;
     end
     
     middle_x_1 = mean(xv1);
@@ -55,13 +55,13 @@ for index = 1:m
             mx2 = face_count(index, 3);
         end
         
-        VH = 1
+        VH = 1;
         if (mx1 > mx2) %lFace on right hand side
-            RT_LB = 1
+            RT_LB = 1;
         end
         
         if (mx1 < mx2) %rFace on right hand side
-            RT_LB = 0
+            RT_LB = 0;
         end
         
     end
@@ -78,13 +78,13 @@ for index = 1:m
             my2 = face_count(index, 4);
         end
         
-        VH = 0
+        VH = 0;
         if (my1 > my2) %lFace on top
-            RT_LB = 1
+            RT_LB = 1;
         end
         
         if (my1 < my2) %rFace on top
-            RT_LB = 0
+            RT_LB = 0;
         end
     end
     

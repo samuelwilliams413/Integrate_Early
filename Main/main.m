@@ -65,7 +65,6 @@ while (1)
             [world] = start_and_endpoints_world(the_D);
             
             while ~not_already_good(world, the_D(4))
-                getting_a_new_domino_things_are_good = 1
                 [the_D, face_count] = get_next_domino(face_count);
                 if face_count.index == -1
                     continue
