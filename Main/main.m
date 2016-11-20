@@ -77,7 +77,8 @@ while (1)
     motor_mover_cart(0,10,-12)
     dynamixel_running()
     
-    rotate(theta);
+    %theta_comp = atand(y2/x2)
+    rotate(theta)%-theta_comp); %this needs to change BRADLEY PLS
     dynamixel_running()
 %     pause(4)
     
