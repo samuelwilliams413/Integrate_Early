@@ -1,7 +1,7 @@
 % Array = [-15, 10; -15, 20; -10 20; -10, 25; 0 20; 10 20]
 % prez_x = 1000
 % prez_y = 1000
-function [prez_x, prez_y] = mapping_parts(prez_x, prez_y, Array)
+function [prez_x, prez_y] = mapping_parts(prez_x, prez_y, z1, Array)
 %%%%%%%%%%%%%%
 %Comment out for when running main loop
 % loadlibrary('dynamixel','dynamixel.h');
@@ -15,7 +15,6 @@ function [prez_x, prez_y] = mapping_parts(prez_x, prez_y, Array)
 % calllib('dynamixel','dxl_write_word', 3, 32, speed);
 % init_motor_pos_up();
 % dynamixel_running()
-z1 = -10;
 
 for i = 1:length(Array)-1
     x1 = Array(i,1);

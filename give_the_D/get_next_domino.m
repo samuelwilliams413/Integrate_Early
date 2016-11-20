@@ -22,6 +22,13 @@ if length(face_data) < index
     face_count.index = -1;
     return;
 end
+
+if index == -1
+    the_D = [-1,-1,-1,-1];
+    face_count.index = -1;
+    return;
+end
+
 the_D(1) = lost(index,(1));
 the_D(2) = lost(index,(4));
 the_D(3) = lost(index,(5));

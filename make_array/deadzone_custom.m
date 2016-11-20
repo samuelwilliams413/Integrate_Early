@@ -3,7 +3,7 @@ function [verified] = deadzone_custom(world)
     % Not reachable
     verified = 0;
     % Jimmy reach
-    jimmyreach = 37.5;
+    jimmyreach = 45;
 
     % Determine length of extension required for point
     req_length = ((world(1,1))^2 + (world(1,2))^2)^0.5;

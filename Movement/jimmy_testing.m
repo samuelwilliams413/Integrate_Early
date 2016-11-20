@@ -24,7 +24,7 @@ if prez_x == 1000 && prez_y == 1000
     dynamixel_running()
 
     move_to_point(x1,y1,z1,x2,y2);
-    dynamixel_running()
+    %dynamixel_running()
 
 elseif prez_x ~= x1 && prez_y ~= y1
     init_motor_pos();
@@ -36,11 +36,11 @@ elseif prez_x ~= x1 && prez_y ~= y1
     move_to_point(x1,y1,z1,x2,y2);
     dynamixel_running()
 else
-    move_to_dom(x1,y1,z1);
-    dynamixel_running()
+    %move_to_dom(x1,y1,z1);
+    %dynamixel_running()
 
     move_to_point(x1,y1,z1,x2,y2);
-    dynamixel_running()
+    %dynamixel_running()
 end 
 
 %move_to_base(x1,y1,z1); %z1=-11

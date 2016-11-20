@@ -54,9 +54,6 @@ while (1)
     % Initially set it that he cannot reach, and check until he can
     verified = [0];
     while verified(1,1) == 0
-        
-        
-        
         [the_D, face_count] = get_next_domino(face_count);
         if face_count.index == -1
             continue
@@ -73,10 +70,7 @@ while (1)
         if face_count.index == -1
             continue
         end
-        
-        
-        
-        
+     
         % Check if Jimmy can reach the domino
         [verified] = deadzone_custom(world);
         
@@ -98,6 +92,7 @@ while (1)
     y2 = world(4);
     theta = the_D(4);
     OI_BRADLEY = [x1 y1;x2 y2]
+    pause(2)
     % RYAN LOOK HERE
     BASE = [40 10];
     A_start = [x1+40 y1];
@@ -107,18 +102,26 @@ while (1)
     for point = 1:length(path(:,1));
         path(point,1) = path(point,1) - 40;
     end
-    [prez_x, prez_y] = mapping_parts(prez_x, prez_y, path);
+    [prez_x, prez_y] = mapping_parts(prez_x, prez_y, z1, path);
     dynamixel_running()
     pause(1)
     
-    %ROTATE
+    theta1 = theta
+    theta2 = atand(x1/y1)
+    theta3 = atand(x2/y2)
+    
+    phi = theta1 + theta2 + theta3
+    if phi < 0
+        phi = 360+phi
+    end
+    rotate(round(phi))
     
     [path] =  pathfinder (BASE, B_finish, face_count)*5 ;
     path = [BASE; path; B_finish];
     for point = 1:length(path(:,1));
         path(point,1) = path(point,1) - 40;
     end
-    [prez_x, prez_y] = mapping_parts(prez_x, prez_y, path);
+    [prez_x, prez_y] = mapping_parts(prez_x, prez_y, z1, path);
     dynamixel_running()
     pause(1)
     

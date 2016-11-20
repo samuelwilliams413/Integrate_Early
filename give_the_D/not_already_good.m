@@ -1,6 +1,6 @@
 function [far_away] = not_already_good (world, theta)
 ANGLE_TOL = 15; %degrees
-DIST_TOL = 5; %cm
+DIST_TOL = 1.5; %cm
 far_away = true;
 
 %check angle
