@@ -21,6 +21,12 @@ if (theta < 0)
     theta = 360 +theta;
 end
 
+if (mod(theta,45) == 0)
+    theta = theta +1
+end
+
+m = tand(theta)
+
 off = y - m*x;
 
 %% plot centerline to check orientation

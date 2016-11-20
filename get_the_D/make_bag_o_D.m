@@ -31,6 +31,9 @@ for i = 1:length(face_data(:,1))
         tmp = face_data(i,1);
         face_data(i,1) = face_data(i,2);
         face_data(i,2) = tmp;
+        before = face_data(i, 5)
+        face_data(i, 5) = mod((face_data(i, 5)+180),360);
+        after = face_data(i, 5)
     end
 end
 face_data = sortrows(face_data,1);
