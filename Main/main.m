@@ -11,6 +11,11 @@ calllib('dynamixel','dxl_write_word', 1, 32, speed);
 calllib('dynamixel','dxl_write_word', 2, 32, speed);
 calllib('dynamixel','dxl_write_word', 3, 32, speed);
 
+z1 = -11;
+prez_x = 1000;
+prez_y = 1000;
+b_x1 = 0;
+b_y1 = 10;
 init_motor_pos_up();
 pause(3);
 
@@ -22,9 +27,6 @@ cam.resolution = '1920x1080';
 cam.Brightness=80;
 % preview(cam);
 filename = 'IMAGE.jpg';
-z1 = -11;
-b_x1 = 0;
-b_y1 = 13;
 
 index = 1;
 
@@ -65,11 +67,27 @@ while (1)
     x2 = world(3);
     y2 = world(4);
     theta = the_D(4);
-    jimmy_testing(x1,y1,z1,b_x1,b_y1);
-    pause(5);
+    
+    jimmy_testing(prez_x, prez_y, x1, y1, z1, b_x1, b_y1);
+    prez_x = b_x1;
+    prez_y = b_y1;
+    dynamixel_running()
+%     pause(4)
+
+    motor_mover_cart(0,10,-12)
+    dynamixel_running()
+    
     rotate(theta);
-    jimmy_testing(b_x1,b_y1,z1,x2,y2);
+    dynamixel_running()
+%     pause(4)
+    
+    jimmy_testing(prez_x, prez_y, b_x1,b_y1,z1,x2,y2);
     init_motor_pos_up();
-    pause(10);
+    prez_x = 1000;
+    prez_y = 1000;
+    dynamixel_running()
+    pause(10)
+    
+    
 end
 end
