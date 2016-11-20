@@ -26,8 +26,8 @@ y_spacing = 3.0;
 
 world = [];
 for i = 1:length(data(:,1))
-    j=(data(i,2)*x_cm_per_pix)-(x_world*0.5)-2.44;
-    k=(y_pixels-data(i,3))*y_cm_per_pix+origin_offset-3.74;
+    j=(data(i,2)*x_cm_per_pix)-(x_world*0.5)-2.69;
+    k=(y_pixels-data(i,3))*y_cm_per_pix+origin_offset-4.2;
     world(i,1)=j;
     world(i,2)=k;
 end
