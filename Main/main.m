@@ -100,13 +100,15 @@ while (1)
     y2 = world(4);
     theta = the_D(4);
     
-    %     % RYAN LOOK HERE
-    %     base = [660 655]
-    %     A_start = [x1 y1]
-    %     B_finish = [x2 x2]
-    %     [path] =  pathfinder (A_start, base, face_count)
-    %     % DO MOVE STUFF
-    %     [path] =  pathfinder (base, B_finish, face_count)
+    % RYAN LOOK HERE
+    BASE = [40 6];
+    A_start = [x1+40 y1];
+    B_finish = [x2+40 y2];
+    [path] =  pathfinder (A_start, BASE, face_count)
+    pause(2.5)
+    % DO MOVE STUFF
+    [path] =  pathfinder (BASE, B_finish, face_count)
+    pause(2.5)
     
     jimmy_testing(prez_x, prez_y, x1, y1, z1, b_x1, b_y1);
     prez_x = b_x1;

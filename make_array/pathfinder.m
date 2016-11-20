@@ -2,9 +2,9 @@ function [path] =  pathfinder (A, B, face_count)
 
 offset = 40;
 
-x1 = A(1) + offset;
-y1 = B(2);
-x2 = A(1) + offset;
+x1 = A(1);
+y1 = A(2);
+x2 = B(1);
 y2 = B(2);
 
 start = [x1 y1];

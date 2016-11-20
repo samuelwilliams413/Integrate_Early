@@ -13,10 +13,10 @@ far_away = true;
 % end
 
 % check xy
-x_diff = abs(world(1) - world(3))
-y_diff = abs(world(2) - world(4))
+x_diff = abs(world(1) - world(3));
+y_diff = abs(world(2) - world(4));
 
-xy = [x_diff y_diff]
+xy = [x_diff y_diff];
 
 if((x_diff < DIST_TOL)  || (y_diff < DIST_TOL))
     far_away = false;
