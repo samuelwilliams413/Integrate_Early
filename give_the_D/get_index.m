@@ -10,6 +10,8 @@ index(4) = X;
 index(5) = Y;
 index(6) = T;
 
+LR = [L R];
+
 if L > 6 || R > 6 || L < 0 || R < 0
     INVALID_DOM = [face(1) face(2)];
     index(1) = -1;

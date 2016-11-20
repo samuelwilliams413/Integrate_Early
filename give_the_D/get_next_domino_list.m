@@ -4,7 +4,9 @@ function [lost] = get_next_domino_list(face_count, lost);
 
 for i = 1:length(face_count(:,1))
     index(i,:) = get_index(face_count(i,:));
+
 end
+
 
 for i = 1:length(index(:,1))
     for j = 1:length(lost(:,1))
