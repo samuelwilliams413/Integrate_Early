@@ -4,18 +4,18 @@
 function [prez_x, prez_y] = mapping_parts(prez_x, prez_y, Array)
 %%%%%%%%%%%%%%
 %Comment out for when running main loop
-
-loadlibrary('dynamixel','dynamixel.h');
-res = calllib('dynamixel','dxl_initialize', 17, 1);
-
+% loadlibrary('dynamixel','dynamixel.h');
+% res = calllib('dynamixel','dxl_initialize', 17, 1);
+% 
+% z1 = -10;
+% speed = 500;
+% slip_comp=1;
+% calllib('dynamixel','dxl_write_word', 1, 32, speed);
+% calllib('dynamixel','dxl_write_word', 2, 32, speed);
+% calllib('dynamixel','dxl_write_word', 3, 32, speed);
+% init_motor_pos_up();
+% dynamixel_running()
 z1 = -10;
-speed = 500;
-slip_comp=1;
-calllib('dynamixel','dxl_write_word', 1, 32, speed);
-calllib('dynamixel','dxl_write_word', 2, 32, speed);
-calllib('dynamixel','dxl_write_word', 3, 32, speed);
-init_motor_pos_up();
-dynamixel_running()
 
 for i = 1:length(Array)-1
     x1 = Array(i,1);
@@ -27,8 +27,6 @@ for i = 1:length(Array)-1
     jimmy_testing(prez_x, prez_y, x1, y1, z1, x2, y2);
     prez_x = x2;
     prez_y = y2;
-    dynamixel_running()
-    %disp('one completion')
     
 end
 
@@ -36,8 +34,8 @@ end
 %Comment out for when running main loop
 
 
-calllib('dynamixel','dxl_terminate');
-unloadlibrary('dynamixel');
+% calllib('dynamixel','dxl_terminate');
+% unloadlibrary('dynamixel');
 
 end
     

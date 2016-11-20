@@ -58,6 +58,6 @@ GAME = struct(field0, value0, field1, value1, field2, value2, field3, value3, fi
 [path] = A_Star(GAME);
 path = flipud(path);
 
-path = [start_fine; path; finish_fine];
+path = [path];
 
 end

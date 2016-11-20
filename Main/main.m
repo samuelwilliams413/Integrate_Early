@@ -62,7 +62,6 @@ while (1)
             continue
         end
         [world] = start_and_endpoints_world(the_D);
-        the_D
         
         while ~not_already_good(world, the_D(4))
             [the_D, face_count] = get_next_domino(face_count);
@@ -70,7 +69,6 @@ while (1)
                 continue
             end
             [world] = start_and_endpoints_world(the_D);
-            the_D
         end
         if face_count.index == -1
             continue
@@ -99,38 +97,53 @@ while (1)
     x2 = world(3);
     y2 = world(4);
     theta = the_D(4);
-    
+    OI_BRADLEY = [x1 y1;x2 y2]
     % RYAN LOOK HERE
-    BASE = [40 6];
+    BASE = [40 10];
     A_start = [x1+40 y1];
     B_finish = [x2+40 y2];
-    [path] =  pathfinder (A_start, BASE, face_count)
-    pause(2.5)
-    % DO MOVE STUFF
-    [path] =  pathfinder (BASE, B_finish, face_count)
-    pause(2.5)
-    
-    jimmy_testing(prez_x, prez_y, x1, y1, z1, b_x1, b_y1);
-    prez_x = b_x1;
-    prez_y = b_y1;
+    [path] =  pathfinder (A_start, BASE, face_count)*5 ;
+    path = [A_start; path; BASE];
+    for point = 1:length(path(:,1));
+        path(point,1) = path(point,1) - 40;
+    end
+    [prez_x, prez_y] = mapping_parts(prez_x, prez_y, path);
     dynamixel_running()
-    %     pause(4)
+    pause(1)
     
+    %ROTATE
     
-    %motor_mover_cart(0,10,-12)
-    %dynamixel_running()
-    
-    %rotate(theta);
+    [path] =  pathfinder (BASE, B_finish, face_count)*5 ;
+    path = [BASE; path; B_finish];
+    for point = 1:length(path(:,1));
+        path(point,1) = path(point,1) - 40;
+    end
+    [prez_x, prez_y] = mapping_parts(prez_x, prez_y, path);
     dynamixel_running()
-    %     pause(4)
+    pause(1)
     
-    jimmy_testing(prez_x, prez_y, b_x1,b_y1,z1,x2,y2);
+    
+    %     jimmy_testing(prez_x, prez_y, x1, y1, z1, b_x1, b_y1);
+    %     prez_x = b_x1;
+    %     prez_y = b_y1;
+    %     dynamixel_running()
+    %     %     pause(4)
+    %
+    %
+    %     %motor_mover_cart(0,10,-12)
+    %     %dynamixel_running()
+    %
+    %     %rotate(theta);
+    %     dynamixel_running()
+    %     %     pause(4)
+    %     jimmy_testing(prez_x, prez_y, b_x1,b_y1,z1,x2,y2);
+    
+    
     init_motor_pos_up();
     prez_x = 1000;
     prez_y = 1000;
     dynamixel_running()
     pause(10)
-    
     
 end
 end
