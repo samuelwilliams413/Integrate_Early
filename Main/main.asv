@@ -22,6 +22,7 @@ pause(3);
 % Camera initialiser
 close all
 clear cam
+a=1
 cam = webcam('Microsoft® LifeCam Studio(TM)');
 cam.resolution = '1920x1080';
 cam.Brightness=80;
@@ -48,17 +49,28 @@ while (1)
     
     % get_next_d
     face_count.index = index;
-    [the_D, face_count] = get_next_domino(face_count);
-    if face_count.index == -1
-        index = 1;
-        face_count.index = 1;
-        here2=0
-        continue
+    
+    % Check that the arm can reach the domino, else re-detect
+    verified = [0];
+    while verified(1,1) == 0
+    
+        [the_D, face_count] = get_next_domino(face_count);
+        if face_count.index == -1
+            index = 1;
+            face_count.index = 1;
+            here2=0
+            continue
+        end
+        index = face_count.index;
+        % convert
+        the_D
+        [world] = start_and_endpoints_world(the_D)
+
+        % Check that the arm can reach the domino, else re-detect
+        [verified] = deadzone(world);
+        
     end
-    index = face_count.index;
-    % convert
-    the_D
-    [world] = start_and_endpoints_world(the_D)
+    
     % move_to_origin
     % rotate
     % move_to_end
@@ -73,12 +85,12 @@ while (1)
     prez_y = b_y1;
     dynamixel_running()
 %     pause(4)
-
-    motor_mover_cart(0,10,-12)
-    dynamixel_running()
     
-    %theta_comp = atand(y2/x2)
-    rotate(theta)%-theta_comp); %this needs to change BRADLEY PLS
+    
+    %motor_mover_cart(0,10,-12)
+    %dynamixel_running()
+    
+    %rotate(theta);
     dynamixel_running()
 %     pause(4)
     
