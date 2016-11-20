@@ -37,7 +37,7 @@ theta4 = alpha4*ratio;
 alpha3 = 180 - alpha4;
 theta3 = 811 - alpha3*ratio;
 motor_mover(3, theta3);
-pause(2.5)
+pause(5)
 % Motor 2 calcs
 alpha2_2 = acosd((L2^2-a^2-L1^2)/(-2*a*L1));
 alpha5 = 0;
