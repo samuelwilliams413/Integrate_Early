@@ -32,7 +32,7 @@ index = 1;
 
 while (1)
     here2 = 1;
-
+    
     % detect
     img = get_img(cam);
     imshow(img);
@@ -72,7 +72,7 @@ while (1)
         if face_count.index == -1
             continue
         end
-     
+        
         % Check if Jimmy can reach the domino
         [verified] = deadzone_custom(world);
         
@@ -101,6 +101,11 @@ while (1)
     A_start = [x1+40 y1];
     B_finish = [x2+40 y2];
     [path] =  pathfinder (A_start, BASE, face_count)*5 ;
+    if length(path(:,1)) == 1
+        if path == ([-1 -1]*5)
+            continue
+        end
+    end
     path = [A_start; path; BASE];
     for point = 1:length(path(:,1));
         path(point,1) = path(point,1) - 40;
@@ -114,7 +119,7 @@ while (1)
     theta3 = atand(x2/y2)
     
     phi = theta1 + theta2 - theta3
-    if phi < 0 
+    if phi < 0
         phi = 360+phi
     end
     if phi > 360
@@ -123,6 +128,11 @@ while (1)
     rotate(phi)
     
     [path] =  pathfinder (BASE, B_finish, face_count)*5 ;
+    if length(path(:,1)) == 1
+        if path == ([-1 -1]*5)
+            continue
+        end
+    end
     path = [BASE; path; B_finish];
     for point = 1:length(path(:,1));
         path(point,1) = path(point,1) - 40;

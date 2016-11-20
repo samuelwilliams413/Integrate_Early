@@ -205,6 +205,7 @@ if ( (xval == xTarget) && (yval == yTarget))
 else
  h=msgbox('Sorry, No path exists to the Target!','warn');
  uiwait(h,5);
+ Optimal_path = [-1 -1]
 end
 path = Optimal_path;
 end
