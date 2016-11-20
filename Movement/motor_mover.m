@@ -54,7 +54,7 @@ GoalPos = final_pos;
 %a=res
 %if res == 1
 %   disp('Succeed to open USB2Dynamixel!');
-    calllib('dynamixel','dxl_write_word', id, 32, 50);
+  %  calllib('dynamixel','dxl_write_word', id, 32, 50);
     calllib('dynamixel','dxl_write_word', id ,P_GOAL_POSITION,GoalPos);     
 %else
 %    disp('Failed to open USB2Dynamixel!');

@@ -5,7 +5,7 @@ total_sorted = 0;
 loadlibrary('dynamixel','dynamixel.h');
 res = calllib('dynamixel','dxl_initialize', 17, 1);
 
-speed = 500;
+speed = 50;
 slip_comp=1;
 calllib('dynamixel','dxl_write_word', 1, 32, speed);
 calllib('dynamixel','dxl_write_word', 2, 32, speed);
@@ -170,7 +170,9 @@ while (1)
     prez_x = 1000;
     prez_y = 1000;
     dynamixel_running()
+    working = 1
     pause(10)
+    working = 0
     
 end
 end
