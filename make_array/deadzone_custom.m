@@ -1,4 +1,4 @@
-function [verified] = deadzone(world)
+function [verified] = deadzone_custom(world)
         
     % Not reachable
     verified = 0;
