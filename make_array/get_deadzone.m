@@ -17,5 +17,16 @@ for i = 1:16
                 index = index + 1;
             end
         end
-    end
+end
+    
+deadzone = [deadzone;[1,1]];
+deadzone = [deadzone;[1,2]];
+deadzone = [deadzone;[1,3]];
+deadzone = [deadzone;[1,4]];
+deadzone = [deadzone;[1,5]];
+deadzone = [deadzone;[1,16]];
+deadzone = [deadzone;[1,15]];
+deadzone = [deadzone;[1,14]];
+deadzone = [deadzone;[1,13]];
+deadzone = [deadzone;[1,12]];
 end
