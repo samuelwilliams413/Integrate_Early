@@ -34,7 +34,7 @@ the_D(2) = lost(index,(4));
 the_D(3) = lost(index,(5));
 
 %HERE
-the_D(4) = lost(index,(6)) + 90;
+the_D(4) = lost(index,(6))
 
 the_D(4) = the_D(4);
 if(the_D(4) < 0)

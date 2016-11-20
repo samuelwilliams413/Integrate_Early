@@ -11,6 +11,21 @@ for index = 1:m
     % Get polygons
     [xv1, yv1, xv2, yv2,theta] = get_polygon(index, trackingin, matches);
     
+    x1mean = mean(xv1);
+    y1mean = mean(yv1);
+    x2mean = mean(xv2);
+    y2mean = mean(yv2);
+    
+    orientation = [0 0];
+    
+    if (x1mean < x2mean)
+        orientation(1) = 1;
+    end
+        
+    if (y1mean < y2mean)
+        orientation(2) = 1;
+    end
+    
     % Left hand sided count
     [in,on] = inpolygon(xq,yq,xv1,yv1);
     lFace = numel(xq(in)) + numel(xq(on));
@@ -24,8 +39,10 @@ for index = 1:m
     % Store centers
     face_count(index, 3) = trackingin(index, 1) + 0.5 * trackingin(index, 3);
     face_count(index, 4) = trackingin(index, 2) + 0.5 * trackingin(index, 4);
-    face_count(index, 5) = theta*2;
-    LRT = [lFace rFace theta];
+    face_count(index, 5) = theta;
+    face_count(index, 6) = orientation(1);
+    face_count(index, 7) = orientation(2);
+    LRT = [lFace rFace theta]
 
     %plotting
         plot(face_count(index, 3)*0.5, face_count(index, 4)*0.5,'g+','LineWidth',2);
