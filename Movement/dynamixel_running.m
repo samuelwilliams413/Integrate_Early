@@ -1,3 +1,4 @@
+function [] = dynamixel_running()
 % Initialise variables describing the current state of the motors
 moving1 = 1;
 moving2 = 0;
@@ -10,4 +11,6 @@ while (moving1 || moving2 || moving3 || moving4)
     moving2 = int32(calllib('dynamixel','dxl_read_byte',2,46));
     moving3 = int32(calllib('dynamixel','dxl_read_byte',3,46));
     moving4 = int32(calllib('dynamixel','dxl_read_byte',4,46));
+end
+
 end

@@ -11,6 +11,11 @@ calllib('dynamixel','dxl_write_word', 1, 32, speed);
 calllib('dynamixel','dxl_write_word', 2, 32, speed);
 calllib('dynamixel','dxl_write_word', 3, 32, speed);
 
+z1 = -11;
+prez_x = 1000;
+prez_y = 1000;
+b_x1 = 0;
+b_y1 = 10;
 init_motor_pos_up();
 pause(3);
 
@@ -22,7 +27,6 @@ cam.resolution = '1920x1080';
 cam.Brightness=80;
 % preview(cam);
 filename = 'IMAGE.jpg';
-z1 = -11;
 
 index = 1;
 
@@ -34,8 +38,9 @@ while (1)
     imwrite(img,filename);
     [matches, dominos, finalfinallines, trackingin] = detection(img);
     % get_list
+    
     if(length(matches) == 0)
-        here1=0
+        here1 = 0;
         continue
     end
     
@@ -46,10 +51,10 @@ while (1)
     [the_D, face_count] = get_next_domino(face_count);
     if face_count.index == -1
         index = 1;
-       face_count.index = 1;
-       here2=0
-       continue
-   end
+        face_count.index = 1;
+        here2=0
+        continue
+    end
     index = face_count.index;
     % convert
     the_D
@@ -62,9 +67,28 @@ while (1)
     x2 = world(3);
     y2 = world(4);
     theta = the_D(4);
-    jimmy_testing(x1,y1,z1,x2,y2,theta);
     
+    jimmy_testing(prez_x, prez_y, x1, y1, z1, b_x1, b_y1);
+    prez_x = b_x1;
+    prez_y = b_y1;
+    dynamixel_running()
+%     pause(4)
+
+    jimmy_testing(prez_x, prez_y, x1, y1, z1, b_x1, b_y1);
+    prez_x = b_x1;
+    prez_y = b_y1;
+
+    rotate(theta);
+    dynamixel_running()
+%     pause(4)
+    
+    jimmy_testing(prez_x, prez_y, b_x1,b_y1,z1,x2,y2);
     init_motor_pos_up();
-    pause(10);
+    prez_x = 1000;
+    prez_y = 1000;
+    dynamixel_running()
+    pause(10)
+    
+    
 end
 end
