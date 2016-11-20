@@ -29,6 +29,7 @@ MAP=2*(ones(MAX_X,MAX_Y));
 j=0;
 x_val = 1;
 y_val = 1;
+figure(1);
 axis([1 MAX_X+1 1 MAX_Y+1])
 grid on;
 hold on;
@@ -188,6 +189,8 @@ if ( (xval == xTarget) && (yval == yTarget))
            parent_y=OPEN(inode,5);
            i=i+1;
     end;
+    % Add the starting point for the first line
+    Optimal_path = [Optimal_path;start];
  j=size(Optimal_path,1);
  %Plot the Optimal Path!
  p=plot(Optimal_path(j,1)+.5,Optimal_path(j,2)+.5,'bo');
