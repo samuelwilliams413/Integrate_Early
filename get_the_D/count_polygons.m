@@ -89,15 +89,9 @@ for index = 1:m
     end
     
     if (lFace == 0 && rFace == 0)
-        if(mod(theta,180) > 90)
             LR = 0;
-            VH == 1;
-            RT_LB == 1;
-        else 
-            LR == 1;
-            VH == 1;
-            RT_LB == 0
-        end
+            VH = 1;
+            RT_LB = 1;
     end
         
     
@@ -132,6 +126,13 @@ for index = 1:m
     
     if (LR == 1 && VH == 0 && RT_LB == 0)
         orientation = 4;
+    end
+    
+    if (lFace == 0 && rFace == 0)
+        orientation = 2;
+        if(mod(theta,180) > 45)
+            orientation = 1;
+        end
     end
     
     face_count(index, 6) = orientation;
