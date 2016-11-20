@@ -2,10 +2,10 @@ function [deadzone] = get_deadzone()
 index = 1;
 for i = 1:16
     if i < 9
-        x = 9 - i
+        x = 9 - i;
     end
     if i > 9
-        x = i - 8
+        x = i - 8;
     end
         for j = 1:8
             

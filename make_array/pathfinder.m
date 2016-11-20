@@ -1,11 +1,11 @@
-function [path] =  pathfinder (world, face_count)
+function [path] =  pathfinder (A, B, face_count)
 
 offset = 40;
 
-x1 = world(1) + offset;
-y1 = world(2);
-x2 = world(3) + offset;
-y2 = world(4);
+x1 = A(1) + offset;
+y1 = B(2);
+x2 = A(1) + offset;
+y2 = B(2);
 
 start = [x1 y1];
 finish = [x2 y2];

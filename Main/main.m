@@ -54,21 +54,30 @@ while (1)
     % Initially set it that he cannot reach, and check until he can
     verified = [0];
     while verified(1,1) == 0
-        if here2 == 0
-            continue
-        end
-        % Get the domino values in pixels
+        
+        
+        
         [the_D, face_count] = get_next_domino(face_count);
         if face_count.index == -1
-            index = 1;
-            face_count.index = 1;
-            here2=0
             continue
         end
-        index = face_count.index;
-        % Convert the domino to cm's
+        [world] = start_and_endpoints_world(the_D);
         the_D
-        [world] = start_and_endpoints_world(the_D)
+        
+        while ~not_already_good(world, the_D(4))
+            [the_D, face_count] = get_next_domino(face_count);
+            if face_count.index == -1
+                continue
+            end
+            [world] = start_and_endpoints_world(the_D);
+            the_D
+        end
+        if face_count.index == -1
+            continue
+        end
+        
+        
+        
         
         % Check if Jimmy can reach the domino
         [verified] = deadzone_custom(world);
@@ -90,6 +99,14 @@ while (1)
     x2 = world(3);
     y2 = world(4);
     theta = the_D(4);
+    
+    %     % RYAN LOOK HERE
+    %     base = [660 655]
+    %     A_start = [x1 y1]
+    %     B_finish = [x2 x2]
+    %     [path] =  pathfinder (A_start, base, face_count)
+    %     % DO MOVE STUFF
+    %     [path] =  pathfinder (base, B_finish, face_count)
     
     jimmy_testing(prez_x, prez_y, x1, y1, z1, b_x1, b_y1);
     prez_x = b_x1;
