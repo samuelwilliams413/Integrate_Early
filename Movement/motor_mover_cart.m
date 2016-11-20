@@ -10,25 +10,22 @@ if x == 0
     alpha1 = 90;
     theta1 = 511;
 elseif x > 0
-    a=1
-    alpha1 = abs(atand(x/y))
-    theta1 = 511 - alpha1*ratio
+    a=1;
+    alpha1 = abs(atand(x/y));
+    theta1 = 511 - alpha1*ratio;
     if y < 0
-        theta1 = 211 -((90-alpha1)*ratio)
+        theta1 = 211 -((90-alpha1)*ratio);
     end
-     
-    
 elseif x < 0
-    alpha1 = abs(atand(x/y))
-    theta1 = 511 + alpha1*ratio
+    alpha1 = abs(atand(x/y));
+    theta1 = 511 + alpha1*ratio;
     if y < 0
-       theta1 = 811 + ((90 - alpha1)*ratio)
+       theta1 = 811 + ((90 - alpha1)*ratio);
     end 
 end
 
-
-
 motor_mover(1, theta1);
+
 % Motor 3 calcs
 a = sqrt(x^2+y^2+z^2);
 
@@ -50,9 +47,4 @@ alpha6 = alpha2_2;
 alpha6 = alpha2_2 + alpha5;
 theta2 = 511 - alpha6*ratio;
 motor_mover(2, theta2);
-
-
-
-
-
 end
