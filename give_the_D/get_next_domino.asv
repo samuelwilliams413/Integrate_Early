@@ -1,9 +1,0 @@
-function [the_D] = get_next_domino_list(face_count, index);
-%% Note to self: you need to return the orienation of the domino
-%% face_count = [lowest_value_face highest_value_face middle_x middle_y]
-
-[lost] = get_next_domino_list(face_count, lost_n_found);
-
-the_D = lost(
-
-end
