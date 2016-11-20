@@ -74,11 +74,11 @@ while (1)
     dynamixel_running()
 %     pause(4)
 
-    jimmy_testing(prez_x, prez_y, x1, y1, z1, b_x1, b_y1);
-    prez_x = b_x1;
-    prez_y = b_y1;
-
-    rotate(theta);
+    motor_mover_cart(0,10,-12)
+    dynamixel_running()
+    
+    %theta_comp = atand(y2/x2)
+    rotate(theta)%-theta_comp); %this needs to change BRADLEY PLS
     dynamixel_running()
 %     pause(4)
     
