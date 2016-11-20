@@ -29,7 +29,7 @@ tmp = 0;
 
 
 for i = 1:length(face_data(:,1))
-    oo =  [face_data(i,1)/2 face_data(i,2)/2 face_data(i,6)  face_data(i,7) face_data(i,5)]
+    twist_array =  [face_data(i,1)/2 face_data(i,2)/2 face_data(i,6)  face_data(i,7) face_data(i,5)];
     if(face_data(i,1) > face_data(i,2))
         tmp = face_data(i,1);
         face_data(i,1) = face_data(i,2);
@@ -40,53 +40,50 @@ for i = 1:length(face_data(:,1))
         %             face_data(i, 5) = mod((face_data(i, 5)+180),360);
         %         end
         %         after = face_data(i, 5)
-        if (oo(3) == 0)
-            oo(3) = 1;
+        if (twist_array(3) == 0)
+            twist_array(3) = 1;
         else
-            oo(3) = 0;
+            twist_array(3) = 0;
         end
         
-        if (oo(4) == 0)
-            oo(4) = 1;
+        if (twist_array(4) == 0)
+            twist_array(4) = 1;
         else
-            oo(4) = 0;
+            twist_array(4) = 0;
         end
     end
     
     % TL
-    if ((oo(3) == 0) && (oo(4) == 0))
-        an = [oo(1) oo(2) oo(3) oo(4) oo(5)]
-        while((oo(5) > 360) || (oo(5) < 270))
-            oo(5) = mod((oo(5) + 90),360)
+    if ((twist_array(3) == 0) && (twist_array(4) == 0))
+        while((twist_array(5) > 360) || (twist_array(5) < 270))
+            twist_array(5) = mod((twist_array(5) + 90),360)
         end
     end
     
     % TR
-    if ((oo(3) == 0) && (oo(4) == 1))
-        an = [oo(1) oo(2) oo(3) oo(4) oo(5)]
-        while((oo(5) > 270) || (oo(5) < 180))
-            oo(5) = mod((oo(5) + 90),360)
+    if ((twist_array(3) == 0) && (twist_array(4) == 1))
+        while((twist_array(5) > 270) || (twist_array(5) < 180))
+            twist_array(5) = mod((twist_array(5) + 90),360)
         end
     end
     
     % BL
-    if ((oo(3) == 1) && (oo(4) == 0))
-        an = [oo(1) oo(2) oo(3) oo(4) oo(5)]
-        while((oo(5) > 90) || (oo(5) < 0))
-            oo(5) = mod((oo(5) + 90),360)
+    if ((twist_array(3) == 1) && (twist_array(4) == 0))
+        while((twist_array(5) > 90) || (twist_array(5) < 0))
+            twist_array(5) = mod((twist_array(5) + 90),360)
         end
     end
     
     % BR
-    if ((oo(3) == 1) && (oo(4) == 1))
-        an = [oo(1) oo(2) oo(3) oo(4) oo(5)]
-        while((oo(5) > 180) || (oo(5) < 90))
-            oo(5) = mod((oo(5) + 90),360)
+    if ((twist_array(3) == 1) && (twist_array(4) == 1))
+        while((twist_array(5) > 180) || (twist_array(5) < 90))
+            twist_array(5) = mod((twist_array(5) + 90),360)
         end
     end
+    face_data(i, 5) = twist_array(5);
+    OUT = [twist_array(1) twist_array(2) twist_array(3) twist_array(4) twist_array(5)]
 end
-face_data(i, 5) = oo(5);
-OUT = [oo(1) oo(2) oo(3) oo(4) oo(5)]
+
 face_data(:, 5) = face_data(:, 5)*SCALING_FACTOR;
 face_data = sortrows(face_data,1);
 
