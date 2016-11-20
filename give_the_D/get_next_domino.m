@@ -3,10 +3,12 @@ function [the_D, face_count] = get_next_domino(face_count);
 %% face_count = [lowest_value_face highest_value_face middle_x middle_y]
 %% the_D = [index middle_x middle_y theta]
 index = face_count.index;
+% a = index
 face_data = face_count.face_data;
 if length(face_data) < index
     the_D = [-1,-1,-1,-1];
     face_count.index = -1;
+%     b = face_count.index
     return;  
 end
 lost = zeros(length(face_data),6);
@@ -14,19 +16,23 @@ lost = zeros(length(face_data),6);
 for(i = 1:length(lost(:,1)))
     if(lost(i,1) == -1)
         index = index+1;
+%         c = index
     end
 end
 
 if length(face_data) < index
     the_D = [-1,-1,-1,-1];
     face_count.index = -1;
+%     d = face_count.index
     return;
 end
+
 the_D(1) = lost(index,(1));
 the_D(2) = lost(index,(4));
 the_D(3) = lost(index,(5));
 the_D(4) = lost(index,(6));
 face_count.index = index + 1;
+% e = face_count.index 
 
 if the_D == [0,0,0,0]
     face_count.index = -1;
