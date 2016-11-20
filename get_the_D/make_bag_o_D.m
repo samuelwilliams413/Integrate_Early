@@ -56,32 +56,31 @@ for i = 1:length(face_data(:,1))
     % TL
     if ((twist_array(3) == 0) && (twist_array(4) == 0))
         while((twist_array(5) > 360) || (twist_array(5) < 270))
-            twist_array(5) = mod((twist_array(5) + 90),360)
+            twist_array(5) = mod((twist_array(5) + 90),360);
         end
     end
     
     % TR
     if ((twist_array(3) == 0) && (twist_array(4) == 1))
         while((twist_array(5) > 270) || (twist_array(5) < 180))
-            twist_array(5) = mod((twist_array(5) + 90),360)
+            twist_array(5) = mod((twist_array(5) + 90),360);
         end
     end
     
     % BL
     if ((twist_array(3) == 1) && (twist_array(4) == 0))
         while((twist_array(5) > 90) || (twist_array(5) < 0))
-            twist_array(5) = mod((twist_array(5) + 90),360)
+            twist_array(5) = mod((twist_array(5) + 90),360);
         end
     end
     
     % BR
     if ((twist_array(3) == 1) && (twist_array(4) == 1))
         while((twist_array(5) > 180) || (twist_array(5) < 90))
-            twist_array(5) = mod((twist_array(5) + 90),360)
+            twist_array(5) = mod((twist_array(5) + 90),360);
         end
     end
     face_data(i, 5) = twist_array(5);
-    OUT = [twist_array(1) twist_array(2) twist_array(3) twist_array(4) twist_array(5)]
 end
 
 face_data(:, 5) = face_data(:, 5)*SCALING_FACTOR;

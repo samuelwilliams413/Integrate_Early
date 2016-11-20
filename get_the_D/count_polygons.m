@@ -42,7 +42,7 @@ for index = 1:m
     face_count(index, 5) = theta;
     face_count(index, 6) = orientation(1);
     face_count(index, 7) = orientation(2);
-    LRT = [lFace rFace theta]
+    LRT = [lFace rFace theta];
 
     %plotting
         plot(face_count(index, 3)*0.5, face_count(index, 4)*0.5,'g+','LineWidth',2);

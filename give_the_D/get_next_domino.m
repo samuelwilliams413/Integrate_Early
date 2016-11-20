@@ -34,7 +34,7 @@ the_D(2) = lost(index,(4));
 the_D(3) = lost(index,(5));
 
 %HERE
-the_D(4) = lost(index,(6))
+the_D(4) = lost(index,(6));
 
 the_D(4) = the_D(4);
 if(the_D(4) < 0)
@@ -45,7 +45,7 @@ if(the_D(4) > 360)
     the_D(4) = mod(the_D(4),360);
 end
 %HERE
-theta_found = the_D(4)
+theta_found = the_D(4);
 face_count.index = index + 1;
 
 if the_D == [0,0,0,0]

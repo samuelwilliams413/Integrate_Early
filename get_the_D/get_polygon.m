@@ -22,10 +22,10 @@ if (theta < 0)
 end
 
 if (mod(theta,45) == 0)
-    theta = theta +1
+    theta = theta +1;
 end
 
-m = tand(theta)
+m = tand(theta);
 
 off = y - m*x;
 
