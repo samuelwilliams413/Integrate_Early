@@ -32,11 +32,13 @@ index = 1;
 
 while (1)
     here2 = 1;
-    close all
+
     % detect
     img = get_img(cam);
     imshow(img);
     imwrite(img,filename);
+    close all
+    figure();
     [matches, dominos, finalfinallines, trackingin] = detection(img);
     % get_list
     
@@ -83,7 +85,9 @@ while (1)
     if here2 == 0
         continue
     end
-    % move_to_origin
+    figure();
+    % move_t
+    o_origin
     % rotate
     % move_to_end
     x1 = world(1);
@@ -110,11 +114,14 @@ while (1)
     theta2 = atand(x1/y1)
     theta3 = atand(x2/y2)
     
-    phi = theta1 + theta2 + theta3
-    if phi < 0
+    phi = theta1 + theta2 - theta3
+    if phi < 0 
         phi = 360+phi
     end
-    rotate(round(phi))
+    if phi > 360
+        phi = phi - 360
+    end
+    rotate(phi)
     
     [path] =  pathfinder (BASE, B_finish, face_count)*5 ;
     path = [BASE; path; B_finish];

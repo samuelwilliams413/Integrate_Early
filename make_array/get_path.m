@@ -38,7 +38,6 @@ finish_fine = finish;
 % obstacles = [[2,1];[2,2];[2,3];[2,4];[2,5];[2,6];[2,8];[4,4];[4,5];[4,6];[4,7];[4,8];[4,9];[4,10];[5,4]];
 
 
-close all
 
 %% Create struct
 field0 = 'start';

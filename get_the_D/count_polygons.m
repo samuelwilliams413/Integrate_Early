@@ -1,6 +1,6 @@
 function [face_count] = count_polygons(centers, trackingin, matches);
 % Create an array of centers for counting
-for index = 1:length(centers)
+for index = 1:length(centers(:,1))
     xq(index) = centers(index, 1);
     yq(index) = centers(index, 2);
 end

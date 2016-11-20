@@ -29,9 +29,10 @@ MAP=2*(ones(MAX_X,MAX_Y));
 j=0;
 x_val = 1;
 y_val = 1;
-figure(1);
+figure(3);
 axis([1 MAX_X+1 1 MAX_Y+1])
 grid on;
+grid minor;
 hold on;
 n=0;%Number of Obstacles
 
@@ -196,7 +197,7 @@ if ( (xval == xTarget) && (yval == yTarget))
  p=plot(Optimal_path(j,1)+.5,Optimal_path(j,2)+.5,'bo');
  j=j-1;
  for i=j:-1:1
-  pause(.25);
+  pause(.125);
   set(p,'XData',Optimal_path(i,1)+.5,'YData',Optimal_path(i,2)+.5);
  drawnow ;
  end;
