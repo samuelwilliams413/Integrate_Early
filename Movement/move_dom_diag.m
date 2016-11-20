@@ -1,4 +1,4 @@
-function [] = move_dom_diag(x1,y1,z1,x2)
+function [] = move_dom_diag(x1,y1,z1,x2,y2)
     motor_mover_cart(x1,y1,z1);
     if x2>x1 && y2>y1
         for i=0:0.5:x2 - x1
