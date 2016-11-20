@@ -28,15 +28,11 @@ obstacles =  floor(obstacles/5);
 
 DZ = get_deadzone();
 obstacles = [obstacles; DZ];
-for i = 1:length(obstacles(:,1))
-    if (obstacles(i,1) == 0 || obstacles(i,2) == 0)
-        obstacles(i,:) = [];
-    end
-end
+
 
 ii = 1;
 for i = 1:length(obstacles(:,1))
-    if ((obstacles(i,1) == finish(1)) && (obstacles(i,2) == finish(1)))
+    if ((obstacles(i,1) == finish(1)) && (obstacles(i,2) == finish(1))) || (obstacles(i,1) == 0 || obstacles(i,2) == 0)
         continue
     end
     tmp_ob(ii,:) = obstacles(i,:);
