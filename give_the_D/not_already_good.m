@@ -1,12 +1,12 @@
 function [far_away] = not_already_good (world, theta)
-ANGLE_TOL = 7.5; %degrees
+ANGLE_TOL = 30; %degrees
 DIST_TOL = 0.75; %cm
 far_away = true;
-
-if ((theta < ANGLE_TOL) || (360 - theta) < ANGLE_TOL)
-    theta = 360 - theta;
-    %check angle
-    ANGLEISGOOD = [theta (360-theta)]
+% 
+% if ((theta < ANGLE_TOL) || (360 - theta) < ANGLE_TOL)
+%     theta = 360 - theta;
+%     %check angle
+%     ANGLEISGOOD = [theta (360-theta)];
     
     % check xy
     x_diff = abs(world(1) - world(3));
@@ -19,7 +19,7 @@ if ((theta < ANGLE_TOL) || (360 - theta) < ANGLE_TOL)
         return;
     end
     
-    
-end
-ANGLEISBAD = [theta (360-theta)]
+%     
+% end
+% ANGLEISBAD = [theta (360-theta)];
 end

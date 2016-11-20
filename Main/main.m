@@ -103,6 +103,8 @@ while (1)
     [path] =  pathfinder (A_start, BASE, face_count)*5 ;
     if length(path(:,1)) == 1
         if path == ([-1 -1]*5)
+            init_motor_pos_up();
+            pause(5);
             continue
         end
     end
@@ -130,6 +132,8 @@ while (1)
     [path] =  pathfinder (BASE, B_finish, face_count)*5 ;
     if length(path(:,1)) == 1
         if path == ([-1 -1]*5)
+            init_motor_pos_up();
+            pause(5);
             continue
         end
     end
