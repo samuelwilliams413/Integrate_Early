@@ -1,4 +1,8 @@
 function [] = move_dom_diag(x1,y1,z1,x2,y2)
+speed = 100;
+calllib('dynamixel','dxl_write_word', 1, 32, speed);
+calllib('dynamixel','dxl_write_word', 2, 32, speed);
+calllib('dynamixel','dxl_write_word', 3, 32, speed);
     motor_mover_cart(x1,y1,z1);
     if x2>x1 && y2>y1
         for i=0:0.5:x2 - x1

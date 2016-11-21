@@ -4,6 +4,10 @@ L2 = 25.4;
 h1 = 10;
 ratio = 300/90;
 %z = z - h1;
+speed = 100;
+calllib('dynamixel','dxl_write_word', 1, 32, speed);
+calllib('dynamixel','dxl_write_word', 2, 32, speed);
+calllib('dynamixel','dxl_write_word', 3, 32, speed);
 
 % Motor 1 calcs
 if x == 0
