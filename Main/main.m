@@ -28,7 +28,9 @@ cam.resolution = '1920x1080';
 cam.Brightness=80;
 % preview(cam);
 filename = 'IMAGE.jpg';
-
+img = get_img(cam);
+img = get_img(cam);
+img = get_img(cam);
 index = 1;
 
 while (1)
@@ -36,6 +38,8 @@ while (1)
     path = [0 0];
     
     % detect
+    img = get_img(cam);
+    img = get_img(cam);
     img = get_img(cam);
     imshow(img);
     imwrite(img,filename);
@@ -97,8 +101,8 @@ while (1)
         y1 = world(2);
         x2 = world(3);
         y2 = world(4);
-        theta = the_D(4)
-        OI_BRADLEY = [x1 y1;x2 y2]
+        theta = the_D(4);
+        OI_BRADLEY = [x1 y1;x2 y2];
         pause(2)
         % RYAN LOOK HERE
         BASE = [40 10];
@@ -125,17 +129,17 @@ while (1)
     pause(1)
     
     theta = mod((360 - theta),180);
-    ANGLE_FOR_BRAD = theta
+    ANGLE_FOR_BRAD = theta;
     
     theta1 = theta;
     theta2 = atand(x1/y1);
     theta3 = atand(x2/y2);
     
     phi = theta1 + theta2 - theta3;
-    phi = mod(phi,360)
+    phi = mod(phi,180)
     
     rotate(phi)
-    pause(5);
+    pause(1);
     [path] =  pathfinder (BASE, B_finish, face_count)*5 ;
     if length(path(:,1)) == 1
         if path == ([-1 -1]*5)
@@ -173,9 +177,7 @@ while (1)
     prez_x = 1000;
     prez_y = 1000;
     dynamixel_running()
-    working = 1
     pause(10)
-    working = 0
     
 end
 end
