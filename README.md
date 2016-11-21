@@ -1,8 +1,6 @@
 # Integrate_Early
 ## Synopsis
 
-At the top of the file there should be a short introduction and/ or overview that explains **what** the project is. This description should match descriptions added for package managers (Gemspec, package.json, etc.)
-
 A repository for team: 'Integrate Early, Upgrade Later' solution to the METR4202 2016 Practical 3: Domino sorting challenge. Contained is the various files, functions and scripts used. Detection used matlab toolboxes and the pdollar image detection libraries. Movement was accomplised via the use of dynamixes and their supporting sortware. Lifecam drivers were used in practice for image capture and a retrofitted A* algorithm was used for path planning.
 
 
@@ -29,10 +27,15 @@ Miscellaneous runfiles that were accidentally committed
 
 ## Contributors
 Bradley Spencer  s4321233@student.uq.edu.au
+
 Bryden Page  s4319413@student.uq.edu.au
+
 Samuel Williams  s4321966@student.uq.edu.au
+
 Ryan Ferguson  s4323183@student.uq.edu.au
+
 Brooke Schafer  s4316647@student.uq.edu.au
+
 
 ## License
 
