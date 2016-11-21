@@ -18,6 +18,7 @@ Get_Next
 Get_Next takes the results of Face_Detection returns the next domino to be sorted based on its index and resemblence to desired conditions.
 
 Movement
+The central file is mapping_parts.m which takes the array created by Path_Planning and uses it to determine what coordinates need to be sent to jimmy_testing.m and jimmy_testing_diag.m, the functions that were directly in charge of manipulating the robotic arm's motors. 
 
 Path_Planning
 A cell decomposition using the dimensions of dominoes as guides was used to create arrays (in tandem with Get_Next) for path planning. A repurposed A* tutorial as used to solve for a valid path. A visual display was created and the path was plotted for a predictive reference.
