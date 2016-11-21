@@ -123,11 +123,11 @@ while (1)
     dynamixel_running()
     pause(1)
     
-    theta1 = theta
-    theta2 = atand(x1/y1)
-    theta3 = atand(x2/y2)
+    theta1 = theta;
+    theta2 = atand(x1/y1);
+    theta3 = atand(x2/y2);
     
-    phi = theta1 + theta2 - theta3 + 360 + 360;
+    phi = theta1 - theta2 + theta3 + 360 + 360;
     phi = mod(phi,360)
     
     rotate(phi)
