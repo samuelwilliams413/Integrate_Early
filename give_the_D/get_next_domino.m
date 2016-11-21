@@ -34,9 +34,9 @@ the_D(2) = lost(index,(4));
 the_D(3) = lost(index,(5));
 
 %HERE
-the_D(4) = lost(index,(6));
+the_D(4) = lost(index,(6)) - 85;
 
-the_D(4) = mod((the_D(4)+360),360);
+the_D(4) = mod((the_D(4)+360),180);
 
 %HERE
 theta_found = the_D(4)

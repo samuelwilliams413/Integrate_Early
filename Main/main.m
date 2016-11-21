@@ -5,13 +5,14 @@ total_sorted = 0;
 loadlibrary('dynamixel','dynamixel.h');
 res = calllib('dynamixel','dxl_initialize', 17, 1);
 
-speed = 50;
+speed = 40;
 slip_comp=1;
 calllib('dynamixel','dxl_write_word', 1, 32, speed);
 calllib('dynamixel','dxl_write_word', 2, 32, speed);
 calllib('dynamixel','dxl_write_word', 3, 32, speed);
+calllib('dynamixel','dxl_write_word', 4, 32, speed);
 
-z1 = -10;
+z1 = -11;
 prez_x = 1000;
 prez_y = 1000;
 b_x1 = 0;
@@ -123,15 +124,18 @@ while (1)
     dynamixel_running()
     pause(1)
     
+    theta = mod((360 - theta),180);
+    ANGLE_FOR_BRAD = theta
+    
     theta1 = theta;
     theta2 = atand(x1/y1);
     theta3 = atand(x2/y2);
     
-    phi = theta1 - theta2 + theta3 + 360 + 360;
+    phi = theta1 + theta2 - theta3;
     phi = mod(phi,360)
     
     rotate(phi)
-    
+    pause(5);
     [path] =  pathfinder (BASE, B_finish, face_count)*5 ;
     if length(path(:,1)) == 1
         if path == ([-1 -1]*5)

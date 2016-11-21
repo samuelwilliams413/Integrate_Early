@@ -41,4 +41,7 @@ end
 obstacles = tmp_ob;
 
 path = get_path(start, finish, obstacles);
+
+path(1,:) = [];
+
 end
