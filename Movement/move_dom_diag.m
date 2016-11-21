@@ -1,5 +1,5 @@
 function [] = move_dom_diag(x1,y1,z1,x2,y2)
-speed = 100;
+speed = 50;
 calllib('dynamixel','dxl_write_word', 1, 32, speed);
 calllib('dynamixel','dxl_write_word', 2, 32, speed);
 calllib('dynamixel','dxl_write_word', 3, 32, speed);
