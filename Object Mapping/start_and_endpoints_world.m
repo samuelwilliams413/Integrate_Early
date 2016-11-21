@@ -22,7 +22,7 @@ y_cm_per_pix = y_world/y_pixels;
 dom_1_x = 0;
 dom_1_y = 34;
 x_spacing = 5.5;
-y_spacing = 3.0;
+y_spacing = 3.5;
 
 world = [];
 for i = 1:length(data(:,1))
